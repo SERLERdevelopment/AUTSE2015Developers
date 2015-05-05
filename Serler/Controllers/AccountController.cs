@@ -27,19 +27,32 @@ namespace Serler.Controllers
             if (model.Password != model.Password2)
             {
                 isValidPassword = false;
-                ModelState.AddModelError("Password2", "Check your password.");
+                ModelState.AddModelError("Password2", "Check your passwords.");
             }
 
-            if (ModelState.IsValid && isValidPassword)
+            var isValidEmail = true;
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
+            {
+                var query = string.Format("select Email from Users where Email = @email;");
+                conn.Open();
+                var member = conn.Query<LoginViewModel>(query, new { email = model.Email }).FirstOrDefault();
+                if (member != null)
+                {
+                    isValidEmail = false;
+                    ModelState.AddModelError("Email", "This email address is in use.");
+                }
+            }
+
+            if (ModelState.IsValid && isValidPassword && isValidEmail)
             {
                 var password = PasswordHelper.GetNewPasswordHash(model.Password);
                 using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                 {
-                    var query = string.Format("insert into users (email, password) values ('{0}', '{1}')", model.Email, password);
+                    var query = string.Format("insert into users (Email, Password, IsPendingUser, IsSystemAdmin, IsModerator, IsAnalyst, IsActive) values ('{0}', '{1}', 1, 0, 0, 0, 1)", model.Email, password);
                     conn.Open();
                     conn.Execute(query);
                 }
-                return View("Login");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(model);
@@ -55,18 +68,18 @@ namespace Serler.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model)
         {
-            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Sonny"].ConnectionString))
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
             {
-                var query = "select membername UserName, Password from member where membername = @memberName";
+                var query = "select Email, Password from Users where Email = @email";
                 conn.Open();
-                var member = conn.Query<LoginViewModel>(query, new { memberName = model.Email }).FirstOrDefault();
+                var member = conn.Query<LoginViewModel>(query, new { email = model.Email }).FirstOrDefault();
                 if (member != null)
                 {
                     if (PasswordHelper.ValidatePassword(model.Password, member.Password))
                     {
                         var auth = new AuthenticationService();
                         auth.SignIn(member);
-                        return RedirectToAction("Index", "Testimonials");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 return View(model);
