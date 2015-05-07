@@ -36,6 +36,16 @@ namespace Serler.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ModifyUser(UserViewModel model)
         {
+            if(ModelState.IsValid)
+            {
+                using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
+                {
+                    var query = "update Users set IsPendingUser = @IsPendingUser, IsSystemAdmin = @IsSystemAdmin, IsModerator = @IsModerator, IsAnalyst = @IsAnalyst where UserId = @UserId;";
+                    conn.Open();
+                    conn.Execute(query, new { IsPendingUser = model.IsPendingUser, IsSystemAdmin = model.IsSystemAdmin, IsModerator = model.IsModerator, IsAnalyst = model.IsAnalyst, UserId = model.UserId });
+                    return RedirectToAction("AllUsers");
+                }
+            }
             return View(model);
         }
 
