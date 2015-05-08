@@ -1,5 +1,57 @@
-﻿@{
+﻿@model Serler.Models.PagedViewModel<Serler.Models.UserViewModel>
+
+@{
     ViewBag.Title = "Moderator";
 }
 
-<h2>Moderator</h2>
+<div class="container">
+    <h2>Moderators</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Pending User</th>
+                <th>System Admin</th>
+                <th>Moderator</th>
+                <th>Analyst</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Result)
+            {
+                <tr>
+                    <th>@user.Email</th>
+                    <th>
+                        @if (user.IsPendingUser)
+                        {
+                            <i class="glyphicon glyphicon-ok"></i>
+                        }
+                    </th>
+                    <th>
+                        @if (user.IsSystemAdmin)
+                        {
+                            <i class="glyphicon glyphicon-ok"></i>
+                        }
+                    </th>
+                    <th>
+                        @if (user.IsModerator)
+                        {
+                            <i class="glyphicon glyphicon-ok"></i>
+                        }
+                    </th>
+                    <th>
+                        @if (user.IsAnalyst)
+                        {
+                            <i class="glyphicon glyphicon-ok"></i>
+                        }
+                    </th>
+                    <th>
+                        <a type="button" class="btn btn-default" href="@Url.Action("ModifyUser", "Admin", new { id = user.UserId })"><i class="glyphicon glyphicon-edit"></i></a>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{Html.RenderPartial("Pagination", Model.PaginationModel);}
+</div>
