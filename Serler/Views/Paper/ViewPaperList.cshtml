@@ -1,0 +1,48 @@
+﻿@model Serler.Models.PaperViewModel
+@{
+    var db = Database.Open("Serler");
+    var selectQueryString = "SELECT * FROM Paper ORDER BY PaperTitle";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Papers</title>
+    <style>
+        table, th, td {
+            border: solid 1px #bbbbbb;
+            border-collapse: collapse;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Paper Information</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>PaperTitle</th>
+                <th>Author</th>
+                <th>Date</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in db.Query(selectQueryString))
+            {
+                <tr>
+                    <td>@row.PaperTitle</td>
+                    <td>@row.Author</td>
+                    <td>@row.Date</td>
+                    <td>@row.Category</td>
+                    <th>
+                        <a type="button" class="btn btn-default" href="@Url.Action("ViewPaper", "Paper", new { id = row.PaperId })"><i class="glyphicon glyphicon-edit"></i></a>
+                    </th>
+                    <th>
+                        <a type="button" class="btn btn-default" href="@Url.Action("EditPaper", "Paper", new { id = row.PaperId })"><i class="glyphicon glyphicon-edit"></i></a>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

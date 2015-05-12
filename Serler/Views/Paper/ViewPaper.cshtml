@@ -1,0 +1,105 @@
+﻿@model Serler.Models.PaperViewModel
+
+@{
+    ViewBag.Title = "Paper's Details";
+}
+
+<div class="container">
+    <h2>Paper's details</h2>
+    <br />
+    @using (Html.BeginForm())
+    {
+
+        <div class="row form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Paper Title</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.PaperTitle, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Research category</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Category, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Year of publication</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Date, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Author</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Author, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Publisher</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Publisher, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Abstract</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Abstract, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Reference</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Reference, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Rating</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Rating, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Number Of people rated</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.NoOfPeopleRated, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Paper Link</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.PaperLink, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                </div>
+            </div>
+        </div>        
+    }
+</div>

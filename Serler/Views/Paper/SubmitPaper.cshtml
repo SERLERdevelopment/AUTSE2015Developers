@@ -1,0 +1,71 @@
+﻿@model Serler.Models.PaperViewModel
+
+@{
+    ViewBag.Title = "SubmitPaper";
+}
+
+<div class="container">
+    <h2>Submit Paper</h2>
+    <h3>Please enter paper's details:</h3>
+    @using (Html.BeginForm())
+    {
+        
+        <div class="row form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Paper Title</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.PaperTitle, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.PaperTitle)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Research category</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Category, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.Category)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Year of publication</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Date, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.Date)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Author</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Author, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.Author)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Link to paper</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.PaperLink, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.PaperLink)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

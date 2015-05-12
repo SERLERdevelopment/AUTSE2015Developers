@@ -188,7 +188,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaperController.cs" />
     <Compile Include="Models\PagedViewModel.cs" />
+    <Compile Include="Models\PaperViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="PasswordHelper.cs" />
     <Compile Include="Global.asax.cs">
@@ -320,6 +322,13 @@
     <Content Include="Views\Admin\Analyst.cshtml" />
     <Content Include="Views\Admin\Pagination.cshtml" />
     <Content Include="Views\Admin\ModifyUser.cshtml" />
+    <Content Include="Views\Paper\SubmitPaper.cshtml" />
+    <Content Include="Views\Paper\EditPaper.cshtml" />
+    <Content Include="Views\Paper\ViewPaperList.cshtml" />
+    <Content Include="Views\Paper\UpdatePapers.cshtml" />
+    <Content Include="Views\Paper\ViewPaper.cshtml" />
+    <Content Include="Views\Paper\ModeratePaper.cshtml" />
+    <Content Include="Views\Paper\ViewModeratorList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

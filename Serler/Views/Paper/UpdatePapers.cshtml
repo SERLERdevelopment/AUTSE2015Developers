@@ -1,0 +1,129 @@
+﻿@{
+    //Validation.RequireField("Name", "Paper's name is required.");
+    //Validation.RequireField("Author", "Paper's author is required");
+    //Validation.RequireField("Date", "Paper's date is required.");
+    //Validation.RequireField("Category", "Paper's Category is required.");
+    //Validation.RequireField("Abstract", "Abstract is required.");
+    //Validation.RequireField("Reference", "Reference is required.");
+    //Validation.RequireField("PaperLink", "Paper's link is required.");
+
+    var Title = "";
+    var Author = "";
+    var Date = "";
+    var Category = "";
+    var Abstract = "";
+    var Reference = "";
+    var PaperLink = "";
+
+    var PaperID = UrlData[0];
+    if (PaperID.IsEmpty())
+    {
+        Response.Redirect("~/EditPaper");
+    }
+
+    var db = Database.Open("Serler");
+
+    if (IsPost) //&& Validation.IsValid())
+    {
+        var updateQueryString =
+            "UPDATE Paper SET PaperTitle@0, Author@1, Date@2, Category@3, Abstract@4, Reference@5, PaperLink@6 WHERE PaperID=@7";
+        Title = Request["Paper's title"];
+        Author = Request["Paper's author"];
+        Date = Request["Paper's date"];
+        Category = Request["Paper's category"];
+        Abstract = Request["Paper's abstract"];
+        Reference = Request["Paper's reference"];
+        PaperLink = Request["Paper's link"];
+        db.Execute(updateQueryString, Title, Author, Date, Category, Abstract, Reference, PaperLink, PaperID);
+        Response.Redirect(@Href("~/EditPaper"));
+    }
+    else
+    {
+        var selectQueryString = "SELECT * FROM Paper WHERE PaperID=@0";
+
+        var row = db.QuerySingle(selectQueryString, PaperID);
+        Title = row.PaperTitle;
+        Author = row.Author;
+        Date = row.Date;
+        Category = row.Category;
+        Abstract = row.Abstract;
+        Reference = row.Reference;
+        PaperLink = row.PaperLink;
+    }
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Paper</title>
+    <style type="text/css">
+        label {
+            float: left;
+            width: 8em;
+            text-align: right;
+            margin-right: 0.5em;
+        }
+
+        fieldset {
+            padding: 1em;
+            border: 1px solid;
+            width: 35em;
+        }
+
+        legend {
+            padding: 2px 4px;
+            border: 1px solid;
+            font-weight: bold;
+        }
+
+        .validation-summary-errors {
+            font-weight: bold;
+            color: red;
+            font-size: 11pt;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update paper</h1>
+    @Html.ValidationSummary("Errors with your submission:")
+    <form method="post" action="">
+        <fieldset>
+            <legend>Update Paper</legend>
+            <div>
+                <label>Name:</label>
+                <input name="Name" type="text" size="50" value="@Title" />
+            </div>
+            <div>
+                <label>Author:</label>
+                <input name="Description" type="text" size="50"
+                       value="@Author" />
+            </div>
+            <div>
+                <label>Date:</label>
+                <input name="Price" type="text" size="50" value="@Date" />
+            </div>
+            <div>
+                <label>Category:</label>
+                <input name="Price" type="text" size="50" value="@Category" />
+            </div>
+            <div>
+                <label>Abstract:</label>
+                <input name="Price" type="text" size="50" value="@Abstract" />
+            </div>
+            <div>
+                <label>Reference:</label>
+                <input name="Price" type="text" size="50" value="@Reference" />
+            </div>
+            <div>
+                <label>Paper Link:</label>
+                <input name="Price" type="text" size="50" value="@PaperLink" />
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <input type="submit" value="Update" class="submit" />
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>
