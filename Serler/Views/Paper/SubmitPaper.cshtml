@@ -9,7 +9,7 @@
     <h3>Please enter paper's details:</h3>
     @using (Html.BeginForm())
     {
-        
+        @Html.HiddenFor(m => m.PaperId)
         <div class="row form-group">
             <div class="row">
                 <div class="col-md-2">
@@ -20,7 +20,6 @@
                     @Html.ValidationMessageFor(m => m.PaperTitle)
                 </div>
             </div>
-            <br />
             <div class="row">
                 <div class="col-md-2">
                     <label>Research category</label>
@@ -28,6 +27,27 @@
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.Category, new { @class = "form-control", type = "text" })
                     @Html.ValidationMessageFor(m => m.Category)
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(m => m.Methodology, "Methodology", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Methodology, new List<SelectListItem> { 
+                       new SelectListItem { Value = "Scrum" , Text = "Scrum" },
+                       new SelectListItem { Value = "Waterfall" , Text = "Waterfall" },
+                       new SelectListItem { Value = "Kanban" , Text = "Kanban" }
+                    }, new { @class = "form-control", type = "text" })                  
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Description of methodology</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.MethodologyDescription, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.MethodologyDescription)
                 </div>
             </div>
             <br />

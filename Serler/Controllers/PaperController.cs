@@ -56,7 +56,8 @@ namespace Serler.Controllers
             {
                 using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                 {
-                    var query = string.Format("insert into Paper (PaperTitle, Date, Author, PaperLink, Category, IsActive) values ('{0}', '{1}','{2}', '{3}','{4}', 0)", model.PaperTitle, model.Date, model.Author, model.PaperLink, model.Category);
+                    var query = string.Format("insert into Paper (PaperTitle, Date, Author, PaperLink, Category, Methodology, MethodologyDescription, IsActive) values ('{0}', '{1}','{2}', '{3}','{4}', '{5}','{6}', 0)", model.PaperTitle, model.Date, model.Author, model.PaperLink, model.Category, model.Methodology,
+                        model.MethodologyDescription);
                     conn.Open();
                     conn.Execute(query);
                 }
