@@ -90,7 +90,7 @@ namespace Serler.Controllers
         {
             var service = new AuthenticationService();
             service.SignOut();
-            return View();
+            return RedirectToAction("index", "Home");
         }
     }
 }

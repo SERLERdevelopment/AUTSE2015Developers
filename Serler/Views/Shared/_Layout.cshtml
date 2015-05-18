@@ -28,9 +28,24 @@
                 </ul>
             </div>
         </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            @RenderBody()
+        <div id="body" class="">
+            <div class="menu">
+                <ul>
+                    <li><a href="@Url.Action("AllUsers", "Admin")">User List</a></li>
+                    <li><a href="@Url.Action("SystemAdmin", "Admin")">Admin List</a></li>
+                    <li><a href="@Url.Action("PendingUser", "Admin")">Pending User List</a></li>
+                    <li><a href="@Url.Action("Analyst", "Admin")">Analyst List</a></li>
+                    <li><a href="@Url.Action("Moderator", "Admin")">Moderator List</a></li>
+                </ul>
+                <ul>
+                    <li><a href="@Url.Action("SubmitPaper", "Paper")">Submit Paper</a></li>
+                </ul>
+            </div>
+            <div class="content">
+                <div class="container">
+                    @RenderBody()
+                </div>
+            </div>            
         </div>
 
         @Scripts.Render("~/bundles/jquery")
