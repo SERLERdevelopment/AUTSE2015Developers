@@ -10,8 +10,22 @@
     </head>
     <body>
         <header>
-            <div class="content-wrapper">
-                
+            <div>
+                <ul class="pull-left">
+                    <li><span class="font-size-23"><a href="@Url.Action("Index","Home")">SERLER</a></span></li>
+                </ul>
+                <ul class="pull-right">                    
+                    @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="#">My Page</a></li>
+                        <li><a href="@Url.Action("Logout","Account")">Log Out</a></li>
+                        <li>Hi, @User.Identity.Name</li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Login","Account")">Log In</a></li>
+                    }
+                </ul>
             </div>
         </header>
         <div id="body">
