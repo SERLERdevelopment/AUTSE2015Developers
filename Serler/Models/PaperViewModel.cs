@@ -29,7 +29,7 @@ namespace Serler.Models
         public string WhoRated { get; set; }
         public string ResearchQuestion { get; set; }
         public string ResearchMethod { get; set; }
-        public string ResearchMetrcis { get; set; }
+        public string ResearchMetrics { get; set; }
         public string ParticipantsNature { get; set; }
         public string PaperLink { get; set; }
         public int NoOfPeopleRated { get; set; }

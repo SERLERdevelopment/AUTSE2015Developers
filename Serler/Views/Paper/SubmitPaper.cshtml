@@ -50,6 +50,27 @@
                 </div>
             </div>
             <br />
+            <div class="form-group">
+                @Html.LabelFor(m => m.Practice, "Practice", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Practice, new List<SelectListItem> {
+                       new SelectListItem { Value = "First" , Text = "First" },
+                       new SelectListItem { Value = "Second" , Text = "Second" },
+                       new SelectListItem { Value = "Third" , Text = "Third" }
+                    }, new { @class = "form-control", type = "text" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Description of Practice</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.PracticeDescription, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.PracticeDescription)
+                </div>
+            </div>
+            <br />
             <div class="row">
                 <div class="col-md-2">
                     <label>Year of publication</label>

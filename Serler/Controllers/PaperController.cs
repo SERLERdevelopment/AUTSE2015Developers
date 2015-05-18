@@ -56,8 +56,9 @@ namespace Serler.Controllers
             {
                 using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                 {
-                    var query = string.Format("insert into Paper (PaperTitle, Date, Author, PaperLink, Category, Methodology, MethodologyDescription, IsActive) values ('{0}', '{1}','{2}', '{3}','{4}', '{5}','{6}', 0)", model.PaperTitle, model.Date, model.Author, model.PaperLink, model.Category, model.Methodology,
-                        model.MethodologyDescription);
+                    var query = string.Format("insert into Paper (PaperTitle, Date, Author, PaperLink, Category, Methodology, MethodologyDescription, Practice, PracticeDescription, IsActive) values ('{0}', '{1}','{2}', '{3}','{4}', '{5}','{6}', 0)", model.PaperTitle,
+                        model.Date, model.Author, model.PaperLink, model.Category, model.Methodology,
+                        model.MethodologyDescription, model.Practice, model.PracticeDescription);
                     conn.Open();
                     conn.Execute(query);
                 }
@@ -95,9 +96,19 @@ namespace Serler.Controllers
             {
                 using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                 {
-                    var query = "Select PaperTitle = @PaperTitle, Category = @Category, Date = @Date, Author = @Author, PaperLink = @PaperLink, Publisher = @Publisher, Abstract = @Abstract, Reference = @Reference, Rating = @Rating, NoOfPeopleRated = @NoOfPeopleRated from Paper;";
+                    var query = "Select PaperTitle = @PaperTitle, Category = @Category, Date = @Date, Author = @Author, PaperLink = @PaperLink, Publisher = @Publisher, " 
+                    + "Abstract = @Abstract, Reference = @Reference, Rating = @Rating, NoOfPeopleRated = @NoOfPeopleRated, Methodology = @Methodology, MethodologyDescription = @MethodologyDescription, "
+                    + "Practice = @Practice, PracticeDescription = @PracticeDescription, OutcomeBeingTested = @OutcomeBeingTested, StudyContext = @StudyContext, "
+                    + "StudyResult = @StudyResult, ImplementationIntegrity = @ImplementationIntegrity, ConfidenceRating = @ConfidenceRating, WhoRated = @WhoRated, "
+                    + "ResearchQuestion = @ResearchQuestion, ResearchMethod = @ResearchMethod, ResearchMetrics = @ResearchMetrics, ParticipantsNature = @ParticipantsNature "
+                    + "from Paper;";
                     conn.Open();
-                    conn.Execute(query, new { PaperTitle = model.PaperTitle, Category = model.Category, Date = model.Date, Author = model.Author, PaperLink = model.PaperLink, PaperId = model.PaperId, Publisher = model.Publisher, Abstract =model.Abstract, Reference = model.Reference, Rating = model.Rating, NoOfPeopleRated = model.NoOfPeopleRated });
+                    conn.Execute(query, new { PaperTitle = model.PaperTitle, Category = model.Category, Date = model.Date, Author = model.Author, PaperLink = model.PaperLink, 
+                    PaperId = model.PaperId, Publisher = model.Publisher, Abstract =model.Abstract, Reference = model.Reference, Rating = model.Rating, 
+                    NoOfPeopleRated = model.NoOfPeopleRated, Methodology = model.Methodology,MethodologyDescription = model.MethodologyDescription, Practice = model.Practice,
+                    PracticeDescription = model.PracticeDescription, OutcomeBeingTested = model.OutcomeBeingTested, StudyContext = model.StudyContext, StudyResult = model.StudyResult,
+                    ImplementationIntegrity = model.ImplementationIntegrity, ConfidenceRating = model.ConfidenceRating, WhoRated = model.WhoRated, ResearchQuestion = model.ResearchQuestion,
+                    ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, ParticipantsNature = model.ParticipantsNature});
                     return RedirectToAction("Index");
                 }
             }
@@ -153,9 +164,16 @@ namespace Serler.Controllers
             {
                 using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                 {
-                    var query = "Update Paper set PaperTitle = @PaperTitle, Category = @Category, Date = @Date, Author = @Author, PaperLink = @PaperLink, Publisher = @Publisher, Abstract = @Abstract, Reference = @Reference where PaperId = @PaperId";
+                    var query = "Update Paper set PaperTitle = @PaperTitle, Category = @Category, Date = @Date, Author = @Author, PaperLink = @PaperLink, Publisher = @Publisher, Abstract = @Abstract, Reference = @Reference, "
+                    + "Rating = @Rating, NoOfPeopleRated = @NoOfPeopleRated, Methodology = @Methodology, MethodologyDescription = @MethodologyDescription, Practice = @Practice, PracticeDescription = @PracticeDescription, "
+                    + "OutcomeBeingTested = @OutcomeBeingTested, StudyContext = @StudyContext,StudyResult = @StudyResult, ImplementationIntegrity = @ImplementationIntegrity, ConfidenceRating = @ConfidenceRating, WhoRated = @WhoRated, "
+                    + "ResearchQuestion = @ResearchQuestion, ResearchMethod = @ResearchMethod, ResearchMetrics = @ResearchMetrics, ParticipantsNature = @ParticipantsNature where PaperId = @PaperId";
                     conn.Open();
-                    conn.Execute(query, new { PaperTitle = model.PaperTitle, Category = model.Category, Date = model.Date, Author = model.Author, PaperLink = model.PaperLink, PaperId = model.PaperId, Publisher = model.Publisher, Abstract = model.Abstract, Reference = model.Reference });
+                    conn.Execute(query, new { PaperTitle = model.PaperTitle, Category = model.Category, Date = model.Date, Author = model.Author, PaperLink = model.PaperLink, PaperId = model.PaperId, Publisher = model.Publisher, Abstract = model.Abstract, Reference = model.Reference, Rating = model.Rating, 
+                    NoOfPeopleRated = model.NoOfPeopleRated, Methodology = model.Methodology,MethodologyDescription = model.MethodologyDescription, Practice = model.Practice,
+                    PracticeDescription = model.PracticeDescription, OutcomeBeingTested = model.OutcomeBeingTested, StudyContext = model.StudyContext, StudyResult = model.StudyResult,
+                    ImplementationIntegrity = model.ImplementationIntegrity, ConfidenceRating = model.ConfidenceRating, WhoRated = model.WhoRated, ResearchQuestion = model.ResearchQuestion,
+                    ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, ParticipantsNature = model.ParticipantsNature});
                     return RedirectToAction("ViewPaperList");
                 }
             }

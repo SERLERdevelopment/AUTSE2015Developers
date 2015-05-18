@@ -15,7 +15,7 @@
                     <label>Paper Title</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.PaperTitle, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                    @Html.DisplayFor(m => m.PaperTitle)
                 </div>
             </div>
             <br />
@@ -24,7 +24,7 @@
                     <label>Research category</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Category, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                    @Html.DisplayFor(m => m.Category)
                 </div>
             </div>
             <br />
@@ -33,7 +33,7 @@
                     <label>Year of publication</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Date, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                    @Html.DisplayFor(m => m.Date)
                 </div>
             </div>
             <br />
@@ -42,7 +42,7 @@
                     <label>Author</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Author, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                    @Html.DisplayFor(m => m.Author)
                 </div>
             </div>
             <br />
@@ -51,7 +51,7 @@
                     <label>Publisher</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Publisher, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                    @Html.DisplayFor(m => m.Publisher)
                 </div>
             </div>
             <br />
@@ -60,7 +60,7 @@
                     <label>Abstract</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Abstract, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                    @Html.DisplayFor(m => m.Abstract)
                 </div>
             </div>
             <br />
@@ -69,7 +69,7 @@
                     <label>Reference</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Reference, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                    @Html.DisplayFor(m => m.Reference)
                 </div>
             </div>
             <br />
@@ -78,7 +78,142 @@
                     <label>Rating</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Rating, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                    @Html.DisplayFor(m => m.Rating)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Methodology</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.Methodology)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Description of Methodology</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.MethodologyDescription)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Practice</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.Practice)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Description of Practice</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.PracticeDescription)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Outcome being tested</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.OutcomeBeingTested)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Study Context</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.StudyContext)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Result of Study</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.StudyResult)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Integrity of implementation</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.ImplementationIntegrity)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Confidence Rating</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.ConfidenceRating)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Who rated</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.WhoRated)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Research Question</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.ResearchQuestion)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Research Method</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.ResearchMethod)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Research Metrics</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.ResearchMetrics)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Research Metrics</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.ResearchMetrics)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Nature of Participants</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.ParticipantsNature)
                 </div>
             </div>
             <br />
@@ -87,7 +222,7 @@
                     <label>Number Of people rated</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.NoOfPeopleRated, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                    @Html.DisplayFor(m => m.NoOfPeopleRated)
                 </div>
             </div>
             <br />
@@ -96,7 +231,7 @@
                     <label>Paper Link</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.PaperLink, new { @class = "form-control", type = "text", ReadOnly = "true" })
+                    @Html.DisplayFor(m => m.PaperLink)
                 </div>
             </div>
         </div>        

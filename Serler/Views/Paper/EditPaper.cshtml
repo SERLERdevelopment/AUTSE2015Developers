@@ -77,6 +77,150 @@
                 </div>
             </div>
             <br />
+            <div class="form-group">
+                @Html.LabelFor(m => m.Methodology, "Methodology", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Methodology, new List<SelectListItem> {
+                       new SelectListItem { Value = "Scrum" , Text = "Scrum" },
+                       new SelectListItem { Value = "Waterfall" , Text = "Waterfall" },
+                       new SelectListItem { Value = "Kanban" , Text = "Kanban" }
+                    }, new { @class = "form-control", type = "text" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Description of methodology</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.MethodologyDescription, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.MethodologyDescription)
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(m => m.Practice, "Practice", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Practice, new List<SelectListItem> {
+                       new SelectListItem { Value = "First" , Text = "First" },
+                       new SelectListItem { Value = "Second" , Text = "Second" },
+                       new SelectListItem { Value = "Third" , Text = "Third" }
+                    }, new { @class = "form-control", type = "text" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Description of Practice</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.PracticeDescription, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.PracticeDescription)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Outcome Being Tested</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.OutcomeBeingTested, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.OutcomeBeingTested)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Context of Study</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.StudyContext, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.StudyContext)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Result of Study</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.StudyResult, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.StudyResult)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Implementation of Integrity</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ImplementationIntegrity, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.ImplementationIntegrity)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Confidence Rating</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ConfidenceRating, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.ConfidenceRating)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Who Rated</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.WhoRated, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.WhoRated)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Research Question</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ResearchQuestion, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.ResearchQuestion)
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(m => m.ResearchMethod, "Research Method", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Practice, new List<SelectListItem> {
+                       new SelectListItem { Value = "First" , Text = "1" },
+                       new SelectListItem { Value = "Second" , Text = "2" },
+                       new SelectListItem { Value = "Third" , Text = "3" }
+                    }, new { @class = "form-control", type = "text" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>ResearchMetrics</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ResearchMetrics, new { @class = "form-control", type = "text" })
+                    @Html.ValidationMessageFor(m => m.ResearchMetrics)
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(m => m.ParticipantsNature, "Nature of Participants", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Practice, new List<SelectListItem> {
+                       new SelectListItem { Value = "Academics" , Text = "Academics" },
+                       new SelectListItem { Value = "Researchers" , Text = "Researchers" },
+                       new SelectListItem { Value = "General" , Text = "General" }
+                    }, new { @class = "form-control", type = "text" })
+                </div>
+            </div>
+            <br />
             <div class="row">
                 <div class="col-md-2">
                     <label>Paper Link</label>
