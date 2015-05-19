@@ -62,7 +62,7 @@ namespace Serler.Controllers
                     conn.Open();
                     conn.Execute(query);
                 }
-                return RedirectToAction("ViewPaperList");
+                return RedirectToAction("Index", "Home");
             }
             return View(model);
         }
@@ -149,6 +149,7 @@ namespace Serler.Controllers
                 ModelState.AddModelError("Author", "The author is empty.");
             }
 
+            if (model.Date == null)
             {
                 isCorrectInput = false;
                 ModelState.AddModelError("Date", "The Date is empty.");
@@ -174,7 +175,7 @@ namespace Serler.Controllers
                     PracticeDescription = model.PracticeDescription, OutcomeBeingTested = model.OutcomeBeingTested, StudyContext = model.StudyContext, StudyResult = model.StudyResult,
                     ImplementationIntegrity = model.ImplementationIntegrity, ConfidenceRating = model.ConfidenceRating, WhoRated = model.WhoRated, ResearchQuestion = model.ResearchQuestion,
                     ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, ParticipantsNature = model.ParticipantsNature});
-                    return RedirectToAction("ViewPaperList");
+                    return RedirectToAction("AdministratePaper");
                 }
             }
             return View(model);
@@ -232,43 +233,43 @@ namespace Serler.Controllers
             if (model.OutcomeBeingTested == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("Outcome Being Tested", "Outcome cannot be empty");
+                ModelState.AddModelError("OutcomeBeingTested", "Outcome cannot be empty");
             }
 
             if (model.StudyContext == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("Study Context", "Context of the study cannot be empty");
+                ModelState.AddModelError("StudyContext", "Context of the study cannot be empty");
             }
 
             if (model.StudyResult == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("Study Result", "Result of study cannot be empty");
+                ModelState.AddModelError("StudyResult", "Result of study cannot be empty");
             }
 
             if (model.ImplementationIntegrity == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("Implementation Integrity", "Implementation Integrity cannot be empty.");
+                ModelState.AddModelError("ImplementationIntegrity", "Implementation Integrity cannot be empty.");
             }
 
             if (model.ConfidenceRating == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("Confidence Rating", "Confidence Rating cannot be empty");
+                ModelState.AddModelError("ConfidenceRating", "Confidence Rating cannot be empty");
             }
 
             if (model.ResearchQuestion == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("Research Question", "Research Question cannot be empty");
+                ModelState.AddModelError("ResearchQuestion", "Research Question cannot be empty");
             }
 
             if (model.ResearchMetrics == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("Research Metrics", "Research Metrics cannot be empty");
+                ModelState.AddModelError("ResearchMetrics", "Research Metrics cannot be empty");
             }
 
             if (ModelState.IsValid && isCorrectInput)
@@ -282,7 +283,7 @@ namespace Serler.Controllers
                     ImplementationIntegrity = model.ImplementationIntegrity, ConfidenceRating = model.ConfidenceRating, WhoRated = model.WhoRated, ResearchQuestion = model.ResearchQuestion,
                     ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, ParticipantsNature = model.ParticipantsNature, PaperId = model.PaperId, Abstract = model.Abstract,
                     Reference = model.Reference});
-                    return RedirectToAction("ViewPaperList");
+                    return RedirectToAction("ViewAnalystList");
                 }
             }
                 return View(model);
