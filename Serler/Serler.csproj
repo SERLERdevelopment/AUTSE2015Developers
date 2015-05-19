@@ -324,13 +324,13 @@
     <Content Include="Views\Admin\ModifyUser.cshtml" />
     <Content Include="Views\Paper\SubmitPaper.cshtml" />
     <Content Include="Views\Paper\EditPaper.cshtml" />
-    <Content Include="Views\Paper\ViewPaperList.cshtml" />
-    <Content Include="Views\Paper\UpdatePapers.cshtml" />
+    <Content Include="Views\Paper\AdministratePaper.cshtml" />
     <Content Include="Views\Paper\ViewPaper.cshtml" />
     <Content Include="Views\Paper\ModeratePaper.cshtml" />
     <Content Include="Views\Paper\ViewModeratorList.cshtml" />
     <Content Include="Views\Paper\AnalyzePaper.cshtml" />
     <Content Include="Views\Paper\ViewAnalystList.cshtml" />
+    <Content Include="Views\Paper\ViewPapers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -62,12 +62,12 @@ namespace Serler.Controllers
                     conn.Open();
                     conn.Execute(query);
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ViewPaperList");
             }
             return View(model);
         }
 
-        public ActionResult ViewPaperList()
+        public ActionResult AdministratePaper()
         {
             return View();
         }
@@ -149,7 +149,6 @@ namespace Serler.Controllers
                 ModelState.AddModelError("Author", "The author is empty.");
             }
 
-            if (model.Date == null)
             {
                 isCorrectInput = false;
                 ModelState.AddModelError("Date", "The Date is empty.");
@@ -162,6 +161,7 @@ namespace Serler.Controllers
             }
             if (ModelState.IsValid && isCorrectInput)
             {
+            if (model.Date == null)
                 using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                 {
                     var query = "Update Paper set PaperTitle = @PaperTitle, Category = @Category, Date = @Date, Author = @Author, PaperLink = @PaperLink, Publisher = @Publisher, Abstract = @Abstract, Reference = @Reference, "
@@ -291,9 +291,40 @@ namespace Serler.Controllers
         public ActionResult ViewAnalystList()
         {
             return View();
-        } 
+        }
 
+        [HttpGet]
+        public ActionResult RejectPaper(int id)
+        {
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
+            {
+                var query = "select * from Paper where PaperId = @PaperId";
+                conn.Open();
+                var model = conn.Query<PaperViewModel>(query, new { PaperId = id }).FirstOrDefault();
+                return View(model);
+            }
+        }
 
+        [HttpPost]
+        public ActionResult RejectPaper(PaperViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
+                {
+                    var query = "Delete * from Paper where PaperId = @PaperId";
+                    conn.Open();
+                    conn.Execute(query, new { PaperId = model.PaperId });
+                    return RedirectToAction("ViewModeratorList");
+                }
+            }
+            return View(model);
+        }
+
+        public ActionResult ViewPapers()
+        {
+            return View();
+        }
     }
 }
 

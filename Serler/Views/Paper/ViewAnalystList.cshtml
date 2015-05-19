@@ -1,7 +1,7 @@
 ﻿@model Serler.Models.PaperViewModel
 @{
     var db = Database.Open("Serler");
-    var selectQueryString = "SELECT * FROM Paper where IsAnalyzed = 0 ORDER BY PaperTitle";
+    var selectQueryString = "SELECT * FROM Paper where IsAnalyzed = 0 and IsActive = 1 ORDER BY PaperTitle";
 }
 <!DOCTYPE html>
 <html>

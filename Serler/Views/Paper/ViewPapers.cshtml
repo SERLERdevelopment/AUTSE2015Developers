@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "ViewPapers";
+    var db = Database.Open("Serler");
+    var selectQueryString = "SELECT * FROM Paper where IsActive = 1 and isAnalyzed = 1 ORDER BY PaperTitle";
+}
+
+<h2>Example Category</h2>
+@foreach (var row in db.Query(selectQueryString))
+{
+    <div class="row form-group">
+        <div class="row">
+            <div class="col-md-2">
+                <a href="@Url.Action("ViewPaper", "Paper", new { id = row.PaperId })"><span class="label label-danger">@row.PaperTitle</span></a>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Research category</label>
+            </div>
+            <div class="col-md-10">
+                @row.Category
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Year of publication</label>
+            </div>
+            <div class="col-md-10">
+                @row.Date
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Author</label>
+            </div>
+            <div class="col-md-10">
+                @row.Author
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Abstract</label>
+            </div>
+            <div class="col-md-10">
+                @row.Abstract
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Methodology</label>
+            </div>
+            <div class="col-md-10">
+                @row.Methodology
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Practice</label>
+            </div>
+            <div class="col-md-10">
+                @row.PaperTitle
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Paper Link</label>
+            </div>
+            <div class="col-md-10">
+                @row.PaperLink
+            </div>
+        </div>
+    </div>
+}
