@@ -332,6 +332,8 @@
     <Content Include="Views\Paper\AnalyzePaper.cshtml" />
     <Content Include="Views\Paper\ViewAnalystList.cshtml" />
     <Content Include="Views\Paper\ViewPapers.cshtml" />
+    <Content Include="Views\Paper\Search.cshtml" />
+    <Content Include="Views\Paper\Pagination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

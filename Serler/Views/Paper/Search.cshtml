@@ -1,0 +1,35 @@
+﻿@model Serler.Models.PagedViewModel<Serler.Models.PaperViewModel>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Date</th>
+            <th>Publisher</th>
+            <th>Rating</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Result)
+        {
+            <tr>
+                <th>@item.PaperTitle</th>
+                <th>@item.Author</th>
+                <th>@item.Date</th>
+                <th>@item.Publisher</th>
+                <th>@item.Rating</th>
+                <th>
+                    <a type="button" class="btn btn-default" href="@Url.Action("EditPaper", "Paper", new { id = item.PaperId })"><i class="glyphicon glyphicon-edit"></i></a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+@{Html.RenderPartial("Pagination", Model.PaginationModel);}

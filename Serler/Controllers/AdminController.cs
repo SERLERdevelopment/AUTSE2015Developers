@@ -161,22 +161,22 @@ namespace Serler.Controllers
 
                 var pagination1 = new PaginationModel();
                 pagination1.DisplayLabel = "<<";
-                pagination1.Url = "~/AllUsers?page=1";
+                pagination1.Url = "~/PendingUser?page=1";
                 pagination1.IsEnable = page <= 1 ? false : true;
 
                 var pagination2 = new PaginationModel();
                 pagination2.DisplayLabel = "<";
-                pagination2.Url = "~/AllUsers?page=" + (page - 1);
+                pagination2.Url = "~/PendingUser?page=" + (page - 1);
                 pagination2.IsEnable = page <= 1 ? false : true;
 
                 var pagination3 = new PaginationModel();
                 pagination3.DisplayLabel = ">";
-                pagination3.Url = "~/AllUsers?page=" + (page + 1);
+                pagination3.Url = "~/PendingUser?page=" + (page + 1);
                 pagination3.IsEnable = page >= maxPage ? false : true;
 
                 var pagination4 = new PaginationModel();
                 pagination4.DisplayLabel = ">>";
-                pagination4.Url = "~/AllUsers?page=" + (page - 1);
+                pagination4.Url = "~/PendingUser?page=" + (page - 1);
                 pagination4.IsEnable = page >= maxPage ? false : true;
 
                 model.PaginationModel = new List<PaginationModel>();
@@ -187,7 +187,7 @@ namespace Serler.Controllers
                 {
                     var paginationModel = new PaginationModel();
                     paginationModel.DisplayLabel = i + 1 + "";
-                    paginationModel.Url = "~/AllUsers?page=" + (i + 1);
+                    paginationModel.Url = "~/PendingUser?page=" + (i + 1);
                     paginationModel.IsEnable = true;
                     if (i + 1 == page)
                     {
@@ -238,22 +238,22 @@ namespace Serler.Controllers
 
                 var pagination1 = new PaginationModel();
                 pagination1.DisplayLabel = "<<";
-                pagination1.Url = "~/AllUsers?page=1";
+                pagination1.Url = "~/SystemAdmin?page=1";
                 pagination1.IsEnable = page <= 1 ? false : true;
 
                 var pagination2 = new PaginationModel();
                 pagination2.DisplayLabel = "<";
-                pagination2.Url = "~/AllUsers?page=" + (page - 1);
+                pagination2.Url = "~/SystemAdmin?page=" + (page - 1);
                 pagination2.IsEnable = page <= 1 ? false : true;
 
                 var pagination3 = new PaginationModel();
                 pagination3.DisplayLabel = ">";
-                pagination3.Url = "~/AllUsers?page=" + (page + 1);
+                pagination3.Url = "~/SystemAdmin?page=" + (page + 1);
                 pagination3.IsEnable = page >= maxPage ? false : true;
 
                 var pagination4 = new PaginationModel();
                 pagination4.DisplayLabel = ">>";
-                pagination4.Url = "~/AllUsers?page=" + (page - 1);
+                pagination4.Url = "~/SystemAdmin?page=" + (page - 1);
                 pagination4.IsEnable = page >= maxPage ? false : true;
 
                 model.PaginationModel = new List<PaginationModel>();
@@ -264,7 +264,7 @@ namespace Serler.Controllers
                 {
                     var paginationModel = new PaginationModel();
                     paginationModel.DisplayLabel = i + 1 + "";
-                    paginationModel.Url = "~/AllUsers?page=" + (i + 1);
+                    paginationModel.Url = "~/SystemAdmin?page=" + (i + 1);
                     paginationModel.IsEnable = true;
                     if (i + 1 == page)
                     {
@@ -315,22 +315,22 @@ namespace Serler.Controllers
 
                 var pagination1 = new PaginationModel();
                 pagination1.DisplayLabel = "<<";
-                pagination1.Url = "~/AllUsers?page=1";
+                pagination1.Url = "~/Moderator?page=1";
                 pagination1.IsEnable = page <= 1 ? false : true;
 
                 var pagination2 = new PaginationModel();
                 pagination2.DisplayLabel = "<";
-                pagination2.Url = "~/AllUsers?page=" + (page - 1);
+                pagination2.Url = "~/Moderator?page=" + (page - 1);
                 pagination2.IsEnable = page <= 1 ? false : true;
 
                 var pagination3 = new PaginationModel();
                 pagination3.DisplayLabel = ">";
-                pagination3.Url = "~/AllUsers?page=" + (page + 1);
+                pagination3.Url = "~/Moderator?page=" + (page + 1);
                 pagination3.IsEnable = page >= maxPage ? false : true;
 
                 var pagination4 = new PaginationModel();
                 pagination4.DisplayLabel = ">>";
-                pagination4.Url = "~/AllUsers?page=" + (page - 1);
+                pagination4.Url = "~/Moderator?page=" + (page - 1);
                 pagination4.IsEnable = page >= maxPage ? false : true;
 
                 model.PaginationModel = new List<PaginationModel>();
@@ -341,7 +341,7 @@ namespace Serler.Controllers
                 {
                     var paginationModel = new PaginationModel();
                     paginationModel.DisplayLabel = i + 1 + "";
-                    paginationModel.Url = "~/AllUsers?page=" + (i + 1);
+                    paginationModel.Url = "~/Moderator?page=" + (i + 1);
                     paginationModel.IsEnable = true;
                     if (i + 1 == page)
                     {
@@ -392,22 +392,22 @@ namespace Serler.Controllers
 
                 var pagination1 = new PaginationModel();
                 pagination1.DisplayLabel = "<<";
-                pagination1.Url = "~/AllUsers?page=1";
+                pagination1.Url = "~/Analyst?page=1";
                 pagination1.IsEnable = page <= 1 ? false : true;
 
                 var pagination2 = new PaginationModel();
                 pagination2.DisplayLabel = "<";
-                pagination2.Url = "~/AllUsers?page=" + (page - 1);
+                pagination2.Url = "~/Analyst?page=" + (page - 1);
                 pagination2.IsEnable = page <= 1 ? false : true;
 
                 var pagination3 = new PaginationModel();
                 pagination3.DisplayLabel = ">";
-                pagination3.Url = "~/AllUsers?page=" + (page + 1);
+                pagination3.Url = "~/Analyst?page=" + (page + 1);
                 pagination3.IsEnable = page >= maxPage ? false : true;
 
                 var pagination4 = new PaginationModel();
                 pagination4.DisplayLabel = ">>";
-                pagination4.Url = "~/AllUsers?page=" + (page - 1);
+                pagination4.Url = "~/Analyst?page=" + (page - 1);
                 pagination4.IsEnable = page >= maxPage ? false : true;
 
                 model.PaginationModel = new List<PaginationModel>();
@@ -418,7 +418,7 @@ namespace Serler.Controllers
                 {
                     var paginationModel = new PaginationModel();
                     paginationModel.DisplayLabel = i + 1 + "";
-                    paginationModel.Url = "~/AllUsers?page=" + (i + 1);
+                    paginationModel.Url = "~/Analyst?page=" + (i + 1);
                     paginationModel.IsEnable = true;
                     if (i + 1 == page)
                     {

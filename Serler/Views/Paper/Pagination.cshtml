@@ -1,0 +1,24 @@
+﻿@model List<Serler.Models.PaginationModel>
+
+<nav>
+    <ul class="pagination">
+        @foreach (var page in Model)
+        {
+            if (page.IsEnable)
+            {
+                if (page.IsActive)
+                {
+                    <li class="active"><a href="@Url.Content(page.Url)">@page.DisplayLabel</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Content(page.Url)">@page.DisplayLabel</a></li>
+                }
+            }
+            else
+            {
+                <li class="disabled"><a href="@Url.Content(page.Url)">@page.DisplayLabel</a></li>
+            }
+        }
+    </ul>
+</nav>
