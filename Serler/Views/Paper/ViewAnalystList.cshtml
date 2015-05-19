@@ -1,7 +1,7 @@
 ﻿@model Serler.Models.PaperViewModel
 @{
     var db = Database.Open("Serler");
-    var selectQueryString = "SELECT * FROM Paper where IsActive = 0 ORDER BY PaperTitle";
+    var selectQueryString = "SELECT * FROM Paper where IsAnalyzed = 0 ORDER BY PaperTitle";
 }
 <!DOCTYPE html>
 <html>
@@ -24,7 +24,11 @@
                 <th>Author</th>
                 <th>Date</th>
                 <th>Category</th>
-                <th>PaperLink</th>
+                <th>Methodology</th>
+                <th>Methodology Description</th>
+                <th>Practice</th>
+                <th>Practice Description</th>
+                <th>Paper Link</th>
             </tr>
         </thead>
         <tbody>
@@ -35,9 +39,13 @@
                     <td>@row.Author</td>
                     <td>@row.Date</td>
                     <td>@row.Category</td>
+                    <td>@row.Methodology</td>
+                    <td>@row.MethodologyDescription</td>
+                    <td>@row.Practice</td>
+                    <td>@row.PracticeDescription</td>
                     <td>@row.PaperLink</td>
                     <th>
-                        <a type="button" class="btn btn-default" href="@Url.Action("ModeratePaper", "Paper", new { id = row.PaperId })"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a type="button" class="btn btn-default" href="@Url.Action("AnalyzePaper", "Paper", new { id = row.PaperId })"><i class="glyphicon glyphicon-edit"></i></a>
                     </th>
                 </tr>
             }

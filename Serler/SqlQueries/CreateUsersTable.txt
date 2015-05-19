@@ -37,4 +37,5 @@ CREATE TABLE dbo.Paper (PaperId int PRIMARY KEY IDENTITY(1,1),
 			ResearchQuestion nvarchar (500),
 			ResearchMethod nvarchar (500),
 			ResearchMetrics nvarchar (500),
-			ParticipantsNature nvarchar (500))
+			ParticipantsNature nvarchar (500),
+			isAnalyzed bit)

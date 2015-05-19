@@ -34,6 +34,7 @@ namespace Serler.Models
         public string PaperLink { get; set; }
         public int NoOfPeopleRated { get; set; }
         public bool IsActive { get; set; }
+        public bool IsAnalyzed { get; set; }
     }
 
 }
