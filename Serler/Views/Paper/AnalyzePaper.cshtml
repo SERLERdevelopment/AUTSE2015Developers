@@ -156,7 +156,7 @@
                 <label>Confidence Rating</label>
             </div>
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.ConfidenceRating, new { @class = "form-control", type = "number" })
+                @Html.TextBoxFor(m => m.ConfidenceRating, new { @class = "form-control", type = "number", min = "1", max = "5"})
                 @Html.ValidationMessageFor(m => m.ConfidenceRating)
             </div>
         </div>
@@ -197,7 +197,7 @@
                 <label>ResearchMetrics</label>
             </div>
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.ResearchMetrics, new { @class = "form-control", type = "number" })
+                @Html.TextBoxFor(m => m.ResearchMetrics, new { @class = "form-control", type = "number", min = "1", max = "5" })
                 @Html.ValidationMessageFor(m => m.ResearchMetrics)
             </div>
         </div>

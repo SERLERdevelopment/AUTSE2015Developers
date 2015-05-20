@@ -230,10 +230,28 @@ namespace Serler.Controllers
         public ActionResult AnalyzePaper(PaperViewModel model)
         {
             var isCorrectInput = true;
+            if (model.Abstract == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("Abstract", "Abstract cannot be empty");
+            }
+
+            if (model.Reference == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("Reference", "Outcome cannot be empty");
+            }
+
             if (model.OutcomeBeingTested == null)
             {
                 isCorrectInput = false;
                 ModelState.AddModelError("OutcomeBeingTested", "Outcome cannot be empty");
+            }
+
+            if (model.WhoRated == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("WhoRated", "Who Rated cannot be empty");
             }
 
             if (model.StudyContext == null)
