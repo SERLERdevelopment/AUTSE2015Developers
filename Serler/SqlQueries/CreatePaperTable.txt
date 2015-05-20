@@ -24,4 +24,5 @@
 			ResearchMethod nvarchar (500),
 			ResearchMetrics nvarchar (500),
 			ParticipantsNature nvarchar (500),
-			isAnalyzed bit)
+			isAnalyzed bit,
+			isRejected bit)

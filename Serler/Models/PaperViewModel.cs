@@ -35,6 +35,7 @@ namespace Serler.Models
         public int NoOfPeopleRated { get; set; }
         public bool IsActive { get; set; }
         public bool IsAnalyzed { get; set; }
+        public bool isRejected { get; set; }
     }
 
 }

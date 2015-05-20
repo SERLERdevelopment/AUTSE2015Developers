@@ -56,9 +56,9 @@ namespace Serler.Controllers
             {
                 using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                 {
-                    var query = string.Format("insert into Paper (PaperTitle, Date, Author, PaperLink, Category, Methodology, MethodologyDescription, Practice, PracticeDescription, IsActive, isAnalyzed) values ('{0}', '{1}','{2}', '{3}','{4}', '{5}','{6}', '{7}', '{8}', 0, 0)", model.PaperTitle,
-                        model.Date, model.Author, model.PaperLink, model.Category, model.Methodology,
-                        model.MethodologyDescription, model.Practice, model.PracticeDescription);
+                    var query = string.Format("insert into Paper (PaperTitle, Date, Author, PaperLink, Category, Methodology, MethodologyDescription, Practice, PracticeDescription, IsActive, isAnalyzed, isRejected) " 
+                    + "values ('{0}', '{1}','{2}', '{3}','{4}', '{5}','{6}', '{7}', '{8}', 0, 0, 0)", model.PaperTitle, model.Date, model.Author, model.PaperLink, model.Category, model.Methodology,
+                    model.MethodologyDescription, model.Practice, model.PracticeDescription);
                     conn.Open();
                     conn.Execute(query);
                 }
@@ -331,7 +331,7 @@ namespace Serler.Controllers
             {
                 using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                 {
-                    var query = "Delete * from Paper where PaperId = @PaperId";
+                    var query = "Update Paper set isRejected = 1 where PaperId = @PaperId";
                     conn.Open();
                     conn.Execute(query, new { PaperId = model.PaperId });
                     return RedirectToAction("ViewModeratorList");
