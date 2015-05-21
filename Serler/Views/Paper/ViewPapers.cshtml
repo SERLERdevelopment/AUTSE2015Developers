@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "ViewPapers";
     var db = Database.Open("Serler");
-    var selectQueryString = "SELECT * FROM Paper where IsActive = 1 and isAnalyzed = 1 ORDER BY PaperTitle";
+    var selectQueryString = "SELECT * FROM Paper where IsActive = 1 and isAnalyzed = 1 and isRejected = 0 ORDER BY PaperTitle";
 }
 
 <h2>Example Category</h2>

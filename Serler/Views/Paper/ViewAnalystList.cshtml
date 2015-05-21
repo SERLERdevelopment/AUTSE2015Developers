@@ -3,53 +3,76 @@
     var db = Database.Open("Serler");
     var selectQueryString = "SELECT * FROM Paper where IsAnalyzed = 0 and IsActive = 1 ORDER BY PaperTitle";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Papers</title>
-    <style>
-        table, th, td {
-            border: solid 1px #bbbbbb;
-            border-collapse: collapse;
-            padding: 2px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Paper Information</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>PaperTitle</th>
-                <th>Author</th>
-                <th>Date</th>
-                <th>Category</th>
-                <th>Methodology</th>
-                <th>Methodology Description</th>
-                <th>Practice</th>
-                <th>Practice Description</th>
-                <th>Paper Link</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var row in db.Query(selectQueryString))
-            {
-                <tr>
-                    <td>@row.PaperTitle</td>
-                    <td>@row.Author</td>
-                    <td>@row.Date</td>
-                    <td>@row.Category</td>
-                    <td>@row.Methodology</td>
-                    <td>@row.MethodologyDescription</td>
-                    <td>@row.Practice</td>
-                    <td>@row.PracticeDescription</td>
-                    <td>@row.PaperLink</td>
-                    <th>
-                        <a type="button" class="btn btn-default" href="@Url.Action("AnalyzePaper", "Paper", new { id = row.PaperId })"><i class="glyphicon glyphicon-edit"></i></a>
-                    </th>
-                </tr>
-            }
-        </tbody>
-    </table>
-</body>
-</html>
+@foreach (var row in db.Query(selectQueryString))
+{
+    <div class="row form-group">
+        <div class="row">
+            <div class="col-md-2">
+                <a href="@Url.Action("AnalyzePaper", "Paper", new { id = row.PaperId })"><span class="label label-danger">@row.PaperTitle</span></a>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Research category</label>
+            </div>
+            <div class="col-md-10">
+                @row.Category
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Year of publication</label>
+            </div>
+            <div class="col-md-10">
+                @row.Date
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Author</label>
+            </div>
+            <div class="col-md-10">
+                @row.Author
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Abstract</label>
+            </div>
+            <div class="col-md-10">
+                @row.Abstract
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Methodology</label>
+            </div>
+            <div class="col-md-10">
+                @row.Methodology
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Practice</label>
+            </div>
+            <div class="col-md-10">
+                @row.PaperTitle
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Paper Link</label>
+            </div>
+            <div class="col-md-10">
+                @row.PaperLink
+            </div>
+        </div>
+    </div>
+}

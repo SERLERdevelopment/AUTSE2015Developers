@@ -47,6 +47,19 @@ namespace Serler.Controllers
                 ModelState.AddModelError("Date", "The Date is empty.");
             }
 
+            if (model.MethodologyDescription == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("MethodologyDescription", "Methodology Description is empty.");
+            }
+
+            if (model.PracticeDescription == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("PracticeDescription", "PracticeDescription is empty.");
+            }
+
+
             if (model.PaperLink == null)
             {
                 isCorrectInput = false;
@@ -116,7 +129,7 @@ namespace Serler.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditPaper(int id)
+        public ActionResult EditPaper(int id, string submit)
         {
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
             {
@@ -128,43 +141,45 @@ namespace Serler.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditPaper(PaperViewModel model)
+        public ActionResult EditPaper(PaperViewModel model, string submit)
         {
-            var isCorrectInput = true;
-            if (model.PaperTitle == null)
-            {
-                isCorrectInput = false;
-                ModelState.AddModelError("PaperTitle", "The title is empty.");
-            }
+            switch (submit) {
+                case "Change":
+                    var isCorrectInput = true;
+                    if (model.PaperTitle == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("PaperTitle", "The title is empty.");
+                    }
 
-            if (model.Category == null)
-            {
-                isCorrectInput = false;
-                ModelState.AddModelError("Category", "The category is empty.");
-            }
+                    if (model.Category == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("Category", "The category is empty.");
+                    }
+    
+                    if (model.Author == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("Author", "The author is empty.");
+                    }
 
-            if (model.Author == null)
-            {
-                isCorrectInput = false;
-                ModelState.AddModelError("Author", "The author is empty.");
-            }
+                    if (model.Date == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("Date", "The Date is empty.");
+                    }
 
-            if (model.Date == null)
-            {
-                isCorrectInput = false;
-                ModelState.AddModelError("Date", "The Date is empty.");
-            }
+                    if (model.PaperLink == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("PaperLink", "The link to paper is empty.");
+                    }
 
-            if (model.PaperLink == null)
-            {
-                isCorrectInput = false;
-                ModelState.AddModelError("PaperLink", "The link to paper is empty.");
-            }
-            if (ModelState.IsValid && isCorrectInput)
-            {
-            if (model.Date == null)
-                using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
-                {
+                    if (ModelState.IsValid && isCorrectInput)
+                    {
+                     using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
+                    {
                     var query = "Update Paper set PaperTitle = @PaperTitle, Category = @Category, Date = @Date, Author = @Author, PaperLink = @PaperLink, Publisher = @Publisher, Abstract = @Abstract, Reference = @Reference, "
                     + "Rating = @Rating, NoOfPeopleRated = @NoOfPeopleRated, Methodology = @Methodology, MethodologyDescription = @MethodologyDescription, Practice = @Practice, PracticeDescription = @PracticeDescription, "
                     + "OutcomeBeingTested = @OutcomeBeingTested, StudyContext = @StudyContext,StudyResult = @StudyResult, ImplementationIntegrity = @ImplementationIntegrity, ConfidenceRating = @ConfidenceRating, WhoRated = @WhoRated, "
@@ -178,6 +193,20 @@ namespace Serler.Controllers
                     return RedirectToAction("AdministratePaper");
                 }
             }
+            break;
+                case "Reject":
+                    if (ModelState.IsValid)
+                    {
+                        using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
+                        {
+                            var query = "Update Paper set isRejected = 1 where PaperId = @PaperId";
+                            conn.Open();
+                            conn.Execute(query, new { PaperId = model.PaperId });
+                            return RedirectToAction("AdministratePaper");
+                        }
+                    }
+                    break;
+        }
             return View(model);
         }
 
