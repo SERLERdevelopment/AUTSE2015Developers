@@ -187,8 +187,9 @@ namespace Serler.Controllers
         }
 
         [HttpGet]
-        public ActionResult ModeratePaper(int id)
+        public ActionResult ModeratePaper(int id, string submit)
         {
+            Response.Write(submit);
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
             {
                 var query = "select * from Paper where PaperId = @PaperId";
@@ -199,17 +200,33 @@ namespace Serler.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModeratePaper(PaperViewModel model)
+        public ActionResult ModeratePaper(PaperViewModel model, string submit)
         {
-            if (ModelState.IsValid)
-            {
-                using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
-                {
-                    var query = "Update Paper set IsActive = 1 where PaperId = @PaperId";
-                    conn.Open();
-                    conn.Execute(query, new {PaperId = model.PaperId});
-                    return RedirectToAction("ViewModeratorList");
-                }
+            switch (submit) {
+                case "Accept":
+                    if (ModelState.IsValid)
+                        {
+                        using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
+                        {
+                            var query = "Update Paper set IsActive = 1 where PaperId = @PaperId";
+                            conn.Open();
+                            conn.Execute(query, new {PaperId = model.PaperId});
+                            return RedirectToAction("ViewModeratorList");
+                        }
+                    }
+                    break;
+                case "Reject":
+                    if (ModelState.IsValid)
+                    {
+                        using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
+                        {
+                            var query = "Update Paper set isRejected = 1 where PaperId = @PaperId";
+                            conn.Open();
+                            conn.Execute(query, new { PaperId = model.PaperId });
+                            return RedirectToAction("ViewModeratorList");
+                        }
+                    }
+                    break;
             }
             return View(model);
         }
@@ -310,34 +327,6 @@ namespace Serler.Controllers
         public ActionResult ViewAnalystList()
         {
             return View();
-        }
-
-        [HttpGet]
-        public ActionResult RejectPaper(int id)
-        {
-            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
-            {
-                var query = "select * from Paper where PaperId = @PaperId";
-                conn.Open();
-                var model = conn.Query<PaperViewModel>(query, new { PaperId = id }).FirstOrDefault();
-                return View(model);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult RejectPaper(PaperViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
-                {
-                    var query = "Update Paper set isRejected = 1 where PaperId = @PaperId";
-                    conn.Open();
-                    conn.Execute(query, new { PaperId = model.PaperId });
-                    return RedirectToAction("ViewModeratorList");
-                }
-            }
-            return View(model);
         }
 
         public ActionResult ViewPapers()
