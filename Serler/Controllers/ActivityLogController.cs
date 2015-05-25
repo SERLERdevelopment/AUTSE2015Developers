@@ -11,7 +11,7 @@ namespace Serler.Controllers
         //
         // GET: /ActivityLog/
 
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             return View();
         }

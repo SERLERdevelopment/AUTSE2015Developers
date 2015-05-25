@@ -179,6 +179,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityLogServices.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -190,6 +191,8 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaperController.cs" />
+    <Compile Include="Models\ActivityLogModel.cs" />
+    <Compile Include="Models\LazyLoadModel.cs" />
     <Compile Include="Models\PagedViewModel.cs" />
     <Compile Include="Models\PaperViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -275,6 +278,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.lazyload.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -284,6 +288,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="SqlQueries\CreateActivityLogTable.txt" />
     <Content Include="SqlQueries\CreatePaperTable.txt" />
     <Content Include="SqlQueries\CreateUsersTable.txt" />
     <Content Include="Web.config" />

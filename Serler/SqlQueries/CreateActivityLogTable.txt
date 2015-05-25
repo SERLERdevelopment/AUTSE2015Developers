@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[ActivityLog](
+	[ActivityLogId] [int] NOT NULL,
+	[UserId] [int] NULL,
+	[Message] [nvarchar](max) NOT NULL,
+	[Url] [nvarchar](500) NULL,
+	[JsonData] [nvarchar](max) NULL,
+	[CreatedOn] [datetime] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[ActivityLog]  WITH CHECK ADD  CONSTRAINT [FK_ActivityLog_Users] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+
+ALTER TABLE [dbo].[ActivityLog] CHECK CONSTRAINT [FK_ActivityLog_Users]
+GO
+
+
