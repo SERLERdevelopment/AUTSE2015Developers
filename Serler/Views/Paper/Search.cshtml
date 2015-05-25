@@ -12,31 +12,43 @@
         @{Html.RenderPartial("SearchBar", Model.SearchModel.SearchText);}
     </div>
 </div>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Date</th>
-            <th>Publisher</th>
-            <th>Rating</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Result)
-        {
+@if (Model.TotalCount == 0)
+{
+    <div>
+        >> There is no paper matched.
+    </div>
+}
+else
+{
+    <div>
+        >> Showing 10 results of @Model.TotalCount
+    </div>
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <th>@item.PaperTitle</th>
-                <th>@item.Author</th>
-                <th>@item.Date</th>
-                <th>@item.Publisher</th>
-                <th>@item.Rating</th>
-                <th>
-                    <a type="button" class="btn btn-default" href="@Url.Action("EditPaper", "Paper", new { id = item.PaperId })"><i class="glyphicon glyphicon-edit"></i></a>
-                </th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Date</th>
+                <th>Publisher</th>
+                <th>Rating</th>
+                <th>Action</th>
             </tr>
-        }
-    </tbody>
-</table>
-@{Html.RenderPartial("Pagination", Model.PaginationModel);}
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Result)
+            {
+                <tr>
+                    <th><a href="@Url.Action("ViewPaper", "Paper", new { id = item.PaperId })">@item.PaperTitle</a></th>
+                    <th>@item.Author</th>
+                    <th>@item.Date</th>
+                    <th>@item.Publisher</th>
+                    <th>@item.Rating</th>
+                    <th>
+                        <a type="button" class="btn btn-default" href="@Url.Action("EditPaper", "Paper", new { id = item.PaperId })"><i class="glyphicon glyphicon-edit"></i></a>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+    {Html.RenderPartial("Pagination", Model.PaginationModel);}
+}

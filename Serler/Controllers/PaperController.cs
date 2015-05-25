@@ -379,7 +379,7 @@ namespace Serler.Controllers
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
             {
                 var countQuery = "select COUNT(PaperId) from Paper where (PaperTitle like @searchText or Author like @searchText or Publisher like @searchText) and IsActive = 1;";
-                var query = string.Format("select * from Paper where (PaperTitle like @searchText or Author like @searchText or Publisher like @searchText) and IsActive = 1 order by PaperTitle;");
+                var query = string.Format("select * from Paper where (PaperTitle like @searchText or Author like @searchText or Publisher like @searchText) and IsActive = 1 order by PaperTitle offset @skip rows fetch next @take rows only;");
                 conn.Open();
                 model.TotalCount = conn.Query<int>(countQuery, new { searchText = "%" + searchText + "%" }).FirstOrDefault();
                 model.SearchModel = new SearchModel
@@ -389,7 +389,7 @@ namespace Serler.Controllers
                 };
                 model.SearchModel.Skip = (page.Value - 1) * model.SearchModel.Take;
 
-                var member = conn.Query<PaperViewModel>(query, new { searchText = "%" + searchText + "%" }).ToList();
+                var member = conn.Query<PaperViewModel>(query, new { searchText = "%" + searchText + "%", skip = model.SearchModel.Skip, take = model.SearchModel.Take }).ToList();
                 if (member != null)
                 {
                     model.Result = member;
@@ -398,22 +398,22 @@ namespace Serler.Controllers
 
                 var pagination1 = new PaginationModel();
                 pagination1.DisplayLabel = "<<";
-                pagination1.Url = "~/Search?page=1";
+                pagination1.Url = "~/Paper/Search?page=1";
                 pagination1.IsEnable = page <= 1 ? false : true;
 
                 var pagination2 = new PaginationModel();
                 pagination2.DisplayLabel = "<";
-                pagination2.Url = "~/Search?page=" + (page - 1);
+                pagination2.Url = "~/Paper/Search?page=" + (page - 1);
                 pagination2.IsEnable = page <= 1 ? false : true;
 
                 var pagination3 = new PaginationModel();
                 pagination3.DisplayLabel = ">";
-                pagination3.Url = "~/Search?page=" + (page + 1);
+                pagination3.Url = "~/Paper/Search?page=" + (page + 1);
                 pagination3.IsEnable = page >= maxPage ? false : true;
 
                 var pagination4 = new PaginationModel();
                 pagination4.DisplayLabel = ">>";
-                pagination4.Url = "~/Search?page=" + (page - 1);
+                pagination4.Url = "~/Paper/Search?page=" + maxPage;
                 pagination4.IsEnable = page >= maxPage ? false : true;
 
                 model.PaginationModel = new List<PaginationModel>();
@@ -424,7 +424,7 @@ namespace Serler.Controllers
                 {
                     var paginationModel = new PaginationModel();
                     paginationModel.DisplayLabel = i + 1 + "";
-                    paginationModel.Url = "~/Search?page=" + (i + 1);
+                    paginationModel.Url = "~/Paper/Search?page=" + (i + 1);
                     paginationModel.IsEnable = true;
                     if (i + 1 == page)
                     {
