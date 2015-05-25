@@ -41,6 +41,10 @@ body {
     background-color: #f2f2f2 !important;
 }
 
+.padding20 {
+    padding: 20px;
+}
+
 /**Login page*/
 
 .login-page {

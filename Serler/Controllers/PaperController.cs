@@ -379,7 +379,7 @@ namespace Serler.Controllers
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
             {
                 var countQuery = "select COUNT(PaperId) from Paper where (PaperTitle like @searchText or Author like @searchText or Publisher like @searchText) and IsActive = 1;";
-                var query = string.Format("select * from Paper where IsActive = 1 order by PaperTitle;");
+                var query = string.Format("select * from Paper where (PaperTitle like @searchText or Author like @searchText or Publisher like @searchText) and IsActive = 1 order by PaperTitle;");
                 conn.Open();
                 model.TotalCount = conn.Query<int>(countQuery, new { searchText = "%" + searchText + "%" }).FirstOrDefault();
                 model.SearchModel = new SearchModel
@@ -389,7 +389,7 @@ namespace Serler.Controllers
                 };
                 model.SearchModel.Skip = (page.Value - 1) * model.SearchModel.Take;
 
-                var member = conn.Query<PaperViewModel>(query).ToList();
+                var member = conn.Query<PaperViewModel>(query, new { searchText = "%" + searchText + "%" }).ToList();
                 if (member != null)
                 {
                     model.Result = member;
