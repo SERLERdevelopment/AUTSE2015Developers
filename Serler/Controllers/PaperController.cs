@@ -6,6 +6,11 @@ using System.Web.Mvc;
 using Serler.Models;
 using System.Data.SqlClient;
 using Dapper;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.tool.xml;
+using System.IO;
 
 namespace Serler.Controllers
 {
@@ -91,7 +96,7 @@ namespace Serler.Controllers
         }
 
         [HttpGet]
-        public ActionResult ViewPaper(int id)
+        public ActionResult ViewPaper(int id, string submit)
         {
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
             {
@@ -103,7 +108,7 @@ namespace Serler.Controllers
         }
 
         [HttpPost]
-        public ActionResult ViewPaper(PaperViewModel model)
+        public ActionResult ViewPaper(PaperViewModel model, string submit)
         {
             if (ModelState.IsValid)
             {
@@ -122,7 +127,36 @@ namespace Serler.Controllers
                     PracticeDescription = model.PracticeDescription, OutcomeBeingTested = model.OutcomeBeingTested, StudyContext = model.StudyContext, StudyResult = model.StudyResult,
                     ImplementationIntegrity = model.ImplementationIntegrity, ConfidenceRating = model.ConfidenceRating, WhoRated = model.WhoRated, ResearchQuestion = model.ResearchQuestion,
                     ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, ParticipantsNature = model.ParticipantsNature});
-                    return RedirectToAction("Index");
+                }
+                switch (submit)
+                {
+                    case "Save":
+                        Byte[] bytes;
+                        using (var ms = new MemoryStream())
+                        {
+                            using (var doc = new Document())
+                            {
+                                using (var writer = PdfWriter.GetInstance(doc, ms))
+                                {
+                                    doc.Open();
+                                    var my_html = @"<p>This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">some</span> <strong>sample <em> text</em></strong><span style=""color: red;"">!!!</span></p>";
+                                    var my_css = @".headline{font-size:100%}";
+                                    using (var msCss = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(my_css)))
+                                    {
+                                        using (var msHtml = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(my_html)))
+                                        {
+                                            iTextSharp.tool.xml.XMLWorkerHelper.GetInstance().ParseXHtml(writer, doc, msHtml, msCss);
+                                        }
+                                    }
+                                    doc.Close();
+                                }
+                            }
+                            bytes = ms.ToArray();
+                        }
+                        var testFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "test.pdf");
+                        System.IO.File.WriteAllBytes(testFile, bytes);
+                        return RedirectToAction("ViewPapers");
+                        break;
                 }
             }
             return View(model);
