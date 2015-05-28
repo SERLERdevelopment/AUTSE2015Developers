@@ -4,6 +4,10 @@
     -moz-box-shadow: 0 0 10px #000000;
     -webkit-box-shadow: 0 0 10px #000000;
     box-shadow: 0 0 10px #000000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
     header ul li {
@@ -99,4 +103,9 @@ body {
     top: 50px;
     left: 0;
     width: 250px;
+}
+
+.content {
+    margin-left: 250px;
+
 }
