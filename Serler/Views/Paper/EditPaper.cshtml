@@ -77,8 +77,10 @@
                 </div>
             </div>
             <br />
-            <div class="form-group">
-                @Html.LabelFor(m => m.Methodology, "Methodology", new { @class = "control-label col-md-2" })
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Methodology</label>
+                </div>
                 <div class="col-md-10">
                     @Html.DropDownListFor(m => m.Methodology, new List<SelectListItem> {
                        new SelectListItem { Value = "Scrum" , Text = "Scrum" },
@@ -98,7 +100,7 @@
                 </div>
             </div>
             <br />
-            <div class="form-group">
+            <div class="row">
                 @Html.LabelFor(m => m.Practice, "Practice", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(m => m.Practice, new List<SelectListItem> {
@@ -189,7 +191,7 @@
                 </div>
             </div>
             <br />
-            <div class="form-group">
+            <div class="row">
                 @Html.LabelFor(m => m.ResearchMethod, "Research Method", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(m => m.Practice, new List<SelectListItem> {
@@ -210,7 +212,7 @@
                 </div>
             </div>
             <br />
-            <div class="form-group">
+            <div class="row">
                 @Html.LabelFor(m => m.ParticipantsNature, "Nature of Participants", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(m => m.Practice, new List<SelectListItem> {

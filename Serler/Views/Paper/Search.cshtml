@@ -21,7 +21,12 @@
 else
 {
     <div>
-        >> Showing 10 results of @Model.TotalCount
+        >> Showing 
+        @if(Model.TotalCount < 10)
+        {<span>@Model.TotalCount</span>}
+        else
+        {<span>10</span>}
+        results of @Model.TotalCount
     </div>
     <table class="table table-hover">
         <thead>
