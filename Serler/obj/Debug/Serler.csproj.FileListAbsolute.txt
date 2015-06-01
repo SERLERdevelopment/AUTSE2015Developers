@@ -252,5 +252,5 @@ D:\Uni\Software Engineering\Software Engineering Assignment 2\AUTSE2015Developer
 D:\Uni\Software Engineering\Software Engineering Assignment 2\AUTSE2015Developers\Serler\obj\Debug\Serler.csprojResolveAssemblyReference.cache
 D:\Uni\Software Engineering\Software Engineering Assignment 2\AUTSE2015Developers\Serler\obj\Debug\Serler.dll
 D:\Uni\Software Engineering\Software Engineering Assignment 2\AUTSE2015Developers\Serler\obj\Debug\Serler.pdb
-D:\Uni\Software Engineering\Software Engineering Assignment 2\AUTSE2015Developers\Serler\bin\itextsharp.xml
 C:\Users\Hyeyoung\Documents\Development\Serler\Serler\bin\itextsharp.xml
+D:\Uni\Software Engineering\Software Engineering Assignment 2\AUTSE2015Developers\Serler\bin\Rotativa.dll
