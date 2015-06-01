@@ -350,6 +350,7 @@
     <Content Include="Views\Paper\ViewPapers.cshtml" />
     <Content Include="Views\Paper\Search.cshtml" />
     <Content Include="Views\Paper\Pagination.cshtml" />
+    <Content Include="Views\Paper\QuickSubmit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

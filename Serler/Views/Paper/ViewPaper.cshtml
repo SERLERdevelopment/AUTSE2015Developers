@@ -21,10 +21,19 @@
             <br />
             <div class="row">
                 <div class="col-md-2">
-                    <label>Research category</label>
+                    <label>Author</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.DisplayFor(m => m.Category)
+                    @Html.DisplayFor(m => m.Author)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Journal Name</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.JournalName)
                 </div>
             </div>
             <br />
@@ -39,10 +48,10 @@
             <br />
             <div class="row">
                 <div class="col-md-2">
-                    <label>Author</label>
+                    <label>Research category</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.DisplayFor(m => m.Author)
+                    @Html.DisplayFor(m => m.Category)
                 </div>
             </div>
             <br />
@@ -57,46 +66,10 @@
             <br />
             <div class="row">
                 <div class="col-md-2">
-                    <label>Abstract</label>
-                </div>
-                <div class="col-md-10">
-                    @Html.DisplayFor(m => m.Abstract)
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-2">
-                    <label>Reference</label>
-                </div>
-                <div class="col-md-10">
-                    @Html.DisplayFor(m => m.Reference)
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-2">
-                    <label>Rating</label>
-                </div>
-                <div class="col-md-10">
-                    @Html.DisplayFor(m => m.Rating)
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-2">
                     <label>Methodology</label>
                 </div>
                 <div class="col-md-10">
                     @Html.DisplayFor(m => m.Methodology)
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-2">
-                    <label>Description of Methodology</label>
-                </div>
-                <div class="col-md-10">
-                    @Html.DisplayFor(m => m.MethodologyDescription)
                 </div>
             </div>
             <br />
@@ -111,15 +84,6 @@
             <br />
             <div class="row">
                 <div class="col-md-2">
-                    <label>Description of Practice</label>
-                </div>
-                <div class="col-md-10">
-                    @Html.DisplayFor(m => m.PracticeDescription)
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-2">
                     <label>Outcome being tested</label>
                 </div>
                 <div class="col-md-10">
@@ -129,10 +93,28 @@
             <br />
             <div class="row">
                 <div class="col-md-2">
-                    <label>Study Context</label>
+                    <label>Study Context (who)</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.DisplayFor(m => m.StudyContext)
+                    @Html.DisplayFor(m => m.ContextWho)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Study Context (what)</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.ContextWhat)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Study Context (where)</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.ContextWhere)
                 </div>
             </div>
             <br />
@@ -160,6 +142,15 @@
                 </div>
                 <div class="col-md-10">
                     @Html.DisplayFor(m => m.ConfidenceRating)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Confidence Rating Reason</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.ConfidenceRatingReason)
                 </div>
             </div>
             <br />
@@ -201,10 +192,10 @@
             <br />
             <div class="row">
                 <div class="col-md-2">
-                    <label>Research Metrics</label>
+                    <label>Research Level</label>
                 </div>
                 <div class="col-md-10">
-                    @Html.DisplayFor(m => m.ResearchMetrics)
+                    @Html.DisplayFor(m => m.ResearchLevel)
                 </div>
             </div>
             <br />
@@ -219,22 +210,22 @@
             <br />
             <div class="row">
                 <div class="col-md-2">
+                    <label>Rating</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.Rating)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
                     <label>Number Of people rated</label>
                 </div>
                 <div class="col-md-10">
                     @Html.DisplayFor(m => m.NoOfPeopleRated)
                 </div>
             </div>
-            <br />
-            <div class="row">
-                <div class="col-md-2">
-                    <label>Paper Link</label>
-                </div>
-                <div class="col-md-10">
-                    @Html.DisplayFor(m => m.PaperLink)
-                </div>
-            </div>
-        </div>
+           </div>
     <div class="row">
         <div class="col-sm-10 col-md-offset-2">
             <button type="submit" name="submit" class="btn btn-default" id="submit" value="Save">Save as PDF</button>

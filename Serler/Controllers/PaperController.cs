@@ -52,31 +52,152 @@ namespace Serler.Controllers
                 ModelState.AddModelError("Date", "The Date is empty.");
             }
 
-            if (model.MethodologyDescription == null)
+            if (model.JournalName == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("MethodologyDescription", "Methodology Description is empty.");
+                ModelState.AddModelError("JournalName", "Journal Name is empty.");
             }
 
-            if (model.PracticeDescription == null)
-            {
-                isCorrectInput = false;
-                ModelState.AddModelError("PracticeDescription", "PracticeDescription is empty.");
-            }
-
-
-            if (model.PaperLink == null)
-            {
-                isCorrectInput = false;
-                ModelState.AddModelError("PaperLink", "The link to paper is empty.");
-            }
             if (ModelState.IsValid && isCorrectInput == true)
             {
                 using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                 {
-                    var query = string.Format("insert into Paper (PaperTitle, Date, Author, PaperLink, Category, Methodology, MethodologyDescription, Practice, PracticeDescription, IsActive, isAnalyzed, isRejected) " 
-                    + "values ('{0}', '{1}','{2}', '{3}','{4}', '{5}','{6}', '{7}', '{8}', 0, 0, 0)", model.PaperTitle, model.Date, model.Author, model.PaperLink, model.Category, model.Methodology,
-                    model.MethodologyDescription, model.Practice, model.PracticeDescription);
+                    var query = string.Format("insert into Paper (PaperTitle, Date, Author, JournalName, Category, Methodology, Practice, IsActive, isAnalyzed, isRejected)" 
+                    + "values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', 0, 0, 0)", model.PaperTitle, model.Date, model.Author, model.JournalName, 
+                    model.Category, model.Methodology, model.Practice);
+                    conn.Open();
+                    conn.Execute(query);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult QuickSubmit()
+        {
+            return View(new PaperViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult QuickSubmit(PaperViewModel model)
+        {
+            var isCorrectInput = true;
+            if (model.PaperTitle == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("PaperTitle", "The title is empty.");
+            }
+
+            if (model.Category == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("Category", "The category is empty.");
+            }
+
+            if (model.JournalName == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("JournalName", "Name of journal is empty.");
+            }
+
+            if (model.Author == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("Author", "The author is empty.");
+            }
+
+            if (model.Date == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("Date", "The Date is empty.");
+            }
+
+            if (model.Publisher == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("Publisher", "Publisher is empty.");
+            }
+
+            if (model.OutcomeBeingTested == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("OutcomeBeingTested", "Outcome being tested is empty.");
+            }
+
+
+            if (model.ContextWho == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("ContextWho", "Study context of who is is empty.");
+            }
+
+            if (model.ContextWhat == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("ContextWhat", "Study context of what is is empty.");
+            }
+
+            if (model.ContextWhere == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("ContextWhere", "Study context of where is is empty.");
+            }
+
+            if (model.WhoRated == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("WhoRated", "Who rated is is empty.");
+            }
+
+            if (model.StudyResult == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("StudyResult", "Result of study is empty.");
+            }
+
+            if (model.ImplementationIntegrity == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("ImplementationIntegrity", "Implementation Integrity cannot be empty.");
+            }
+
+            if (model.ConfidenceRating == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("ConfidenceRating", "Confidence Rating cannot be empty");
+            }
+
+            if (model.ConfidenceRating == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("ConfidenceRatingReason", "Reason for Confidence Rating cannot be empty");
+            }
+
+            if (model.ResearchQuestion == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("ResearchQuestion", "Research Question cannot be empty");
+            }
+
+            if (model.ResearchMetrics == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("ResearchMetrics", "Research Metrics cannot be empty");
+            }
+
+            if (ModelState.IsValid && isCorrectInput == true)
+            {
+                using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
+                {
+                    var query = string.Format("insert into Paper (PaperTitle, Date, Author, JournalName, Category, Publisher, Methodology, Practice, OutcomeBeingTested, ContextWho," 
+                    + " ContextWhat, ContextWhere, StudyResult, ImplementationIntegrity, ConfidenceRating, ConfidenceRatingReason, WhoRated, ResearchQuestion, ResearchMethod,"
+                    + " ResearchMetrics, ResearchLevel, ParticipantsNature, IsActive, isAnalyzed, isRejected) "
+                    + "values ('{0}', '{1}','{2}', '{3}','{4}', '{5}','{6}', '{7}', '{8}','{9}', '{10}','{11}', '{12}','{13}', '{14}','{15}', '{16}', '{17}',"
+                    + " '{18}', '{19}','{20}', '{21}','{22}', 1, 1, 0)", model.PaperTitle, model.Date, model.Author, model.JournalName, model.Category,
+                    model.Methodology, model.Practice, model.OutcomeBeingTested, model.ContextWho, model.ContextWhat, model.ContextWhere, model.StudyResult,
+                    model.ImplementationIntegrity, model.ConfidenceRating, model.ConfidenceRatingReason, model.WhoRated, model.ResearchQuestion, model.ResearchMethod,
+                    model.ResearchMetrics, model.ResearchLevel, model.ParticipantsNature);
                     conn.Open();
                     conn.Execute(query);
                 }
@@ -114,19 +235,20 @@ namespace Serler.Controllers
             {
                 using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                 {
-                    var query = "Select PaperTitle = @PaperTitle, Category = @Category, Date = @Date, Author = @Author, PaperLink = @PaperLink, Publisher = @Publisher, " 
-                    + "Abstract = @Abstract, Reference = @Reference, Rating = @Rating, NoOfPeopleRated = @NoOfPeopleRated, Methodology = @Methodology, MethodologyDescription = @MethodologyDescription, "
-                    + "Practice = @Practice, PracticeDescription = @PracticeDescription, OutcomeBeingTested = @OutcomeBeingTested, StudyContext = @StudyContext, "
-                    + "StudyResult = @StudyResult, ImplementationIntegrity = @ImplementationIntegrity, ConfidenceRating = @ConfidenceRating, WhoRated = @WhoRated, "
-                    + "ResearchQuestion = @ResearchQuestion, ResearchMethod = @ResearchMethod, ResearchMetrics = @ResearchMetrics, ParticipantsNature = @ParticipantsNature "
-                    + "from Paper;";
+                    var query = "Select PaperTitle = @PaperTitle, Category = @Category, Date = @Date, Author = @Author, JournalName = @JournalName, Publisher = @Publisher, " 
+                    + "Rating = @Rating, NoOfPeopleRated = @NoOfPeopleRated, Methodology = @Methodology, Practice = @Practice, OutcomeBeingTested = @OutcomeBeingTested,"
+                    + "ContextWho = @ContextWho, ContextWhat = @ContextWhat, ContextWhere = @ContextWhere, StudyResult = @StudyResult,"
+                    + "ImplementationIntegrity = @ImplementationIntegrity, ConfidenceRating = @ConfidenceRating, ConfidenceRatingReason = @ConfidenceRatingReason, "
+                    + "WhoRated = @WhoRated, ResearchQuestion = @ResearchQuestion, ResearchMethod = @ResearchMethod, ResearchMetrics = @ResearchMetrics,"
+                    + " ResearchLevel = @ResearchLevel, ParticipantsNature = @ParticipantsNature from Paper;";
                     conn.Open();
-                    conn.Execute(query, new { PaperTitle = model.PaperTitle, Category = model.Category, Date = model.Date, Author = model.Author, PaperLink = model.PaperLink, 
-                    PaperId = model.PaperId, Publisher = model.Publisher, Abstract =model.Abstract, Reference = model.Reference, Rating = model.Rating, 
-                    NoOfPeopleRated = model.NoOfPeopleRated, Methodology = model.Methodology,MethodologyDescription = model.MethodologyDescription, Practice = model.Practice,
-                    PracticeDescription = model.PracticeDescription, OutcomeBeingTested = model.OutcomeBeingTested, StudyContext = model.StudyContext, StudyResult = model.StudyResult,
-                    ImplementationIntegrity = model.ImplementationIntegrity, ConfidenceRating = model.ConfidenceRating, WhoRated = model.WhoRated, ResearchQuestion = model.ResearchQuestion,
-                    ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, ParticipantsNature = model.ParticipantsNature});
+                    conn.Execute(query, new { PaperTitle = model.PaperTitle, Category = model.Category, Date = model.Date, Author = model.Author, JournalName = model.JournalName, 
+                    PaperId = model.PaperId, Publisher = model.Publisher, Rating = model.Rating, NoOfPeopleRated = model.NoOfPeopleRated, Methodology = model.Methodology,
+                    Practice = model.Practice, OutcomeBeingTested = model.OutcomeBeingTested, ContextWho = model.ContextWho, ContextWhat = model.ContextWhat, 
+                    ContextWhere = model.ContextWhere,StudyResult = model.StudyResult, ImplementationIntegrity = model.ImplementationIntegrity, 
+                    ConfidenceRating = model.ConfidenceRating, ConfidenceRatingReason = model.ConfidenceRatingReason, WhoRated = model.WhoRated, 
+                    ResearchQuestion = model.ResearchQuestion,ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, 
+                    ResearchLevel = model.ResearchLevel, ParticipantsNature = model.ParticipantsNature});
                 }
                 switch (submit)
                 {
@@ -191,7 +313,13 @@ namespace Serler.Controllers
                         isCorrectInput = false;
                         ModelState.AddModelError("Category", "The category is empty.");
                     }
-    
+
+                    if (model.JournalName == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("JournalName", "Name of journal is empty.");
+                    }
+
                     if (model.Author == null)
                     {
                         isCorrectInput = false;
@@ -204,26 +332,97 @@ namespace Serler.Controllers
                         ModelState.AddModelError("Date", "The Date is empty.");
                     }
 
-                    if (model.PaperLink == null)
+                    if (model.Publisher == null)
                     {
                         isCorrectInput = false;
-                        ModelState.AddModelError("PaperLink", "The link to paper is empty.");
+                        ModelState.AddModelError("Publisher", "Publisher is empty.");
+                    }
+
+                    if (model.OutcomeBeingTested == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("OutcomeBeingTested", "Outcome being tested is empty.");
+                    }
+
+
+                    if (model.ContextWho == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("ContextWho", "Study context of who is is empty.");
+                    }
+
+                    if (model.ContextWhat == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("ContextWhat", "Study context of what is is empty.");
+                    }
+
+                    if (model.ContextWhere == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("ContextWhere", "Study context of where is is empty.");
+                    }
+
+                    if (model.StudyResult == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("StudyResult", "Result of study is empty.");
+                    }
+
+                    if (model.ImplementationIntegrity == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("ImplementationIntegrity", "Implementation Integrity cannot be empty.");
+                    }
+
+                    if (model.ConfidenceRating == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("ConfidenceRating", "Confidence Rating cannot be empty");
+                    }
+
+                    if (model.ConfidenceRatingReason == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("ConfidenceRatingReason", "Reason for Confidence Rating cannot be empty");
+                    }
+
+                    if (model.WhoRated == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("WhoRated", "Who Rated cannot be empty");
+                    }
+
+                    if (model.ResearchQuestion == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("ResearchQuestion", "Research Question cannot be empty");
+                    }
+
+                    if (model.ResearchMetrics == null)
+                    {
+                        isCorrectInput = false;
+                        ModelState.AddModelError("ResearchMetrics", "Research Metrics cannot be empty");
                     }
 
                     if (ModelState.IsValid && isCorrectInput)
                     {
                      using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                     {
-                    var query = "Update Paper set PaperTitle = @PaperTitle, Category = @Category, Date = @Date, Author = @Author, PaperLink = @PaperLink, Publisher = @Publisher, Abstract = @Abstract, Reference = @Reference, "
-                    + "Rating = @Rating, NoOfPeopleRated = @NoOfPeopleRated, Methodology = @Methodology, MethodologyDescription = @MethodologyDescription, Practice = @Practice, PracticeDescription = @PracticeDescription, "
-                    + "OutcomeBeingTested = @OutcomeBeingTested, StudyContext = @StudyContext,StudyResult = @StudyResult, ImplementationIntegrity = @ImplementationIntegrity, ConfidenceRating = @ConfidenceRating, WhoRated = @WhoRated, "
-                    + "ResearchQuestion = @ResearchQuestion, ResearchMethod = @ResearchMethod, ResearchMetrics = @ResearchMetrics, ParticipantsNature = @ParticipantsNature where PaperId = @PaperId";
+                    var query = "Update Paper set PaperTitle = @PaperTitle, Category = @Category, Date = @Date, Author = @Author, JournalName = @JournalName, Publisher = @Publisher,"
+                    + "Rating = @Rating, NoOfPeopleRated = @NoOfPeopleRated, Methodology = @Methodology,Practice = @Practice, OutcomeBeingTested = @OutcomeBeingTested,"
+                    + "ContextWho = @ContextWho,ContextWhat = @ContextWhat, ContextWhere = @ContextWhere,StudyResult = @StudyResult," 
+                    + "ImplementationIntegrity = @ImplementationIntegrity, ConfidenceRating = @ConfidenceRating,"
+                    + "ConfidenceRatingReason = @ConfidenceRatingReason, WhoRated = @WhoRated, ResearchQuestion = @ResearchQuestion, ResearchMethod = @ResearchMethod,"
+                    + "ResearchMetrics = @ResearchMetrics, ResearchLevel = @ResearchLevel, ParticipantsNature = @ParticipantsNature where PaperId = @PaperId";
                     conn.Open();
-                    conn.Execute(query, new { PaperTitle = model.PaperTitle, Category = model.Category, Date = model.Date, Author = model.Author, PaperLink = model.PaperLink, PaperId = model.PaperId, Publisher = model.Publisher, Abstract = model.Abstract, Reference = model.Reference, Rating = model.Rating, 
-                    NoOfPeopleRated = model.NoOfPeopleRated, Methodology = model.Methodology,MethodologyDescription = model.MethodologyDescription, Practice = model.Practice,
-                    PracticeDescription = model.PracticeDescription, OutcomeBeingTested = model.OutcomeBeingTested, StudyContext = model.StudyContext, StudyResult = model.StudyResult,
-                    ImplementationIntegrity = model.ImplementationIntegrity, ConfidenceRating = model.ConfidenceRating, WhoRated = model.WhoRated, ResearchQuestion = model.ResearchQuestion,
-                    ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, ParticipantsNature = model.ParticipantsNature});
+                    conn.Execute(query, new { PaperTitle = model.PaperTitle, Category = model.Category, Date = model.Date, Author = model.Author, JournalName = model.JournalName, 
+                    PaperId = model.PaperId, Publisher = model.Publisher, Rating = model.Rating,  NoOfPeopleRated = model.NoOfPeopleRated, Methodology = model.Methodology,
+                    Practice = model.Practice, OutcomeBeingTested = model.OutcomeBeingTested, ContextWho = model.ContextWho, ContextWhat = model.ContextWhat, 
+                    ContextWhere = model.ContextWhere,StudyResult = model.StudyResult, ImplementationIntegrity = model.ImplementationIntegrity, 
+                    ConfidenceRating = model.ConfidenceRating, ConfidenceRatingReason = model.ConfidenceRatingReason, WhoRated = model.WhoRated, 
+                    ResearchQuestion = model.ResearchQuestion, ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, 
+                    ResearchLevel = model.ResearchLevel, ParticipantsNature = model.ParticipantsNature});
                     return RedirectToAction("AdministratePaper");
                 }
             }
@@ -310,40 +509,35 @@ namespace Serler.Controllers
         public ActionResult AnalyzePaper(PaperViewModel model)
         {
             var isCorrectInput = true;
-            if (model.Abstract == null)
-            {
-                isCorrectInput = false;
-                ModelState.AddModelError("Abstract", "Abstract cannot be empty");
-            }
-
-            if (model.Reference == null)
-            {
-                isCorrectInput = false;
-                ModelState.AddModelError("Reference", "Outcome cannot be empty");
-            }
-
             if (model.OutcomeBeingTested == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("OutcomeBeingTested", "Outcome cannot be empty");
+                ModelState.AddModelError("OutcomeBeingTested", "Outcome being tested is empty.");
             }
 
-            if (model.WhoRated == null)
+
+            if (model.ContextWho == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("WhoRated", "Who Rated cannot be empty");
+                ModelState.AddModelError("ContextWho", "Study context of who is is empty.");
             }
 
-            if (model.StudyContext == null)
+            if (model.ContextWhat == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("StudyContext", "Context of the study cannot be empty");
+                ModelState.AddModelError("ContextWhat", "Study context of what is is empty.");
+            }
+
+            if (model.ContextWhere == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("ContextWhere", "Study context of where is is empty.");
             }
 
             if (model.StudyResult == null)
             {
                 isCorrectInput = false;
-                ModelState.AddModelError("StudyResult", "Result of study cannot be empty");
+                ModelState.AddModelError("StudyResult", "Result of study is empty.");
             }
 
             if (model.ImplementationIntegrity == null)
@@ -356,6 +550,12 @@ namespace Serler.Controllers
             {
                 isCorrectInput = false;
                 ModelState.AddModelError("ConfidenceRating", "Confidence Rating cannot be empty");
+            }
+
+            if (model.ConfidenceRating == null)
+            {
+                isCorrectInput = false;
+                ModelState.AddModelError("ConfidenceRatingReason", "Reason for Confidence Rating cannot be empty");
             }
 
             if (model.ResearchQuestion == null)
@@ -374,13 +574,16 @@ namespace Serler.Controllers
             {
                 using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
                 {
-                    var query = "Update Paper set Abstract = @Abstract, Reference = @Reference, OutcomeBeingTested = @OutcomeBeingTested, StudyContext = @StudyContext,StudyResult = @StudyResult, ImplementationIntegrity = @ImplementationIntegrity, ConfidenceRating = @ConfidenceRating, WhoRated = @WhoRated, "
-                    + "ResearchQuestion = @ResearchQuestion, ResearchMethod = @ResearchMethod, ResearchMetrics = @ResearchMetrics, ParticipantsNature = @ParticipantsNature, isAnalyzed = 1 where PaperId = @PaperId";
+                    var query = "Update Paper set OutcomeBeingTested = @OutcomeBeingTested, ContextWho = @ContextWho, ContextWhat = @ContextWhat, ContextWhere = @ContextWhere,"
+                    + "StudyResult = @StudyResult, ImplementationIntegrity = @ImplementationIntegrity, ConfidenceRating = @ConfidenceRating,"
+                    + "ConfidenceRatingReason = @ConfidenceRatingReason, WhoRated = @WhoRated, ResearchQuestion = @ResearchQuestion, ResearchMethod = @ResearchMethod,"
+                    + "ResearchMetrics = @ResearchMetrics, ResearchLevel = @ResearchLevel, ParticipantsNature = @ParticipantsNature, isAnalyzed = 1 where PaperId = @PaperId";
                     conn.Open();
-                    conn.Execute(query, new {OutcomeBeingTested = model.OutcomeBeingTested, StudyContext = model.StudyContext, StudyResult = model.StudyResult,
-                    ImplementationIntegrity = model.ImplementationIntegrity, ConfidenceRating = model.ConfidenceRating, WhoRated = model.WhoRated, ResearchQuestion = model.ResearchQuestion,
-                    ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, ParticipantsNature = model.ParticipantsNature, PaperId = model.PaperId, Abstract = model.Abstract,
-                    Reference = model.Reference});
+                    conn.Execute(query, new {OutcomeBeingTested = model.OutcomeBeingTested, ContextWho = model.ContextWho, ContextWhat = model.ContextWhat, 
+                    ContextWhere = model.ContextWhere, StudyResult = model.StudyResult, ImplementationIntegrity = model.ImplementationIntegrity, 
+                    ConfidenceRating = model.ConfidenceRating, ConfidenceRatingReason = model.ConfidenceRatingReason, WhoRated = model.WhoRated,
+                    ResearchQuestion = model.ResearchQuestion, ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, ResearchLevel = model.ResearchLevel,
+                    ParticipantsNature = model.ParticipantsNature, PaperId = model.PaperId});
                     return RedirectToAction("ViewAnalystList");
                 }
             }
