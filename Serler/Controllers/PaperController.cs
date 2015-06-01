@@ -250,8 +250,7 @@ namespace Serler.Controllers
                 switch (submit)
                 {
                     case "Save":
-                        return new Rotativa.ViewAsPdf("ViewPaper", model);
-                        break;
+                        return new Rotativa.PartialViewAsPdf("ViewPaper", model);
                 }
             }
             return View(model);
