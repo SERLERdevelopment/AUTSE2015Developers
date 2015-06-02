@@ -1,9 +1,16 @@
-﻿@model string
+﻿@model Serler.Models.SearchModel
 
 @using (Html.BeginForm())
 {
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
+            @Html.DropDownListFor(m => m.Attribute, new List<SelectListItem> {
+                new SelectListItem { Value = "PaperTitle" , Text = "Title" },
+                new SelectListItem { Value = "Auther" , Text = "Auther" },
+                new SelectListItem { Value = "Publisher" , Text = "Publisher" }
+            }, new { @class = "form-control", type = "text" })
+        </div>
+        <div class="col-md-8">
             <div class="input-group">
                 <input type="text" name="SearchText" class="form-control" placeholder="Search for...">
                 <span class="input-group-btn">

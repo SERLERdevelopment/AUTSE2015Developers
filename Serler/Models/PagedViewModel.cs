@@ -19,6 +19,7 @@ namespace Serler.Models
         public int Skip { get; set; }
         public int Take { get; set; }
         public string SearchText { get; set; }
+        public string Attribute { get; set; }
     }
 
     public class PaginationModel

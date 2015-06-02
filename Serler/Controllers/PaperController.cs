@@ -572,7 +572,7 @@ namespace Serler.Controllers
             return View();
         }
 
-        public ActionResult Search(string searchText, int? page)
+        public ActionResult Search(string searchText, string attribute, int? page)
         {
             if (page == null || page < 0)
             {
@@ -583,22 +583,30 @@ namespace Serler.Controllers
             {
                 searchText = "";
             }
+
             var model = new PagedViewModel<PaperViewModel>();
+
+            if (string.IsNullOrEmpty(attribute))
+            {
+                attribute = "PaperTitle";
+            }
 
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
             {
-                var countQuery = "select COUNT(PaperId) from Paper where (PaperTitle like @searchText or Author like @searchText or Publisher like @searchText) and IsActive = 1;";
-                var query = string.Format("select * from Paper where (PaperTitle like @searchText or Author like @searchText or Publisher like @searchText) and IsActive = 1 order by PaperTitle offset @skip rows fetch next @take rows only;");
+                var countQuery = "select COUNT(PaperId) from Paper where (@attribute like @searchText) and IsActive = 1;";
+                var query = string.Format("select * from Paper where (@attribute like @searchText) and IsActive = 1 order by PaperTitle offset @skip rows fetch next @take rows only;");
                 conn.Open();
-                model.TotalCount = conn.Query<int>(countQuery, new { searchText = "%" + searchText + "%" }).FirstOrDefault();
+                model.TotalCount = conn.Query<int>(countQuery, new { attribute = attribute, searchText = "%" + searchText + "%" }).FirstOrDefault();
+
                 model.SearchModel = new SearchModel
                 {
                     SearchText = "%" + searchText + "%",
-                    Take = 10
+                    Take = 10,
+                    Attribute = attribute
                 };
                 model.SearchModel.Skip = (page.Value - 1) * model.SearchModel.Take;
 
-                var member = conn.Query<PaperViewModel>(query, new { searchText = "%" + searchText + "%", skip = model.SearchModel.Skip, take = model.SearchModel.Take }).ToList();
+                var member = conn.Query<PaperViewModel>(query, new { attribute = model.SearchModel.Attribute, searchText = "%" + searchText + "%", skip = model.SearchModel.Skip, take = model.SearchModel.Take }).ToList();
                 if (member != null)
                 {
                     model.Result = member;
