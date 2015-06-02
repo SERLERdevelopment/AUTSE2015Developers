@@ -40,6 +40,8 @@ header a {
     -moz-box-shadow: 5px 5px 5px #DADADA;
     -webkit-box-shadow: 5px 5px 5px #DADADA;
     box-shadow: 5px 5px 5px #DADADA;
+    width: 100%;
+    max-width: 1000px;
 }
 
 body {
@@ -108,5 +110,22 @@ body {
 
 .content {
     margin-left: 250px;
+}
 
+.menu ul {
+    margin: 0;
+}
+
+.menu ul li {
+    height: 35px;
+    padding: 10px 0;
+}
+
+.menu ul a {
+    color: #ffffff;
+}
+
+.menu ul a:hover {
+    text-decoration: none;
+    color: #ffffff;
 }

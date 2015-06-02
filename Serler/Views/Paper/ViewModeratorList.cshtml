@@ -5,7 +5,7 @@
 }
 @foreach (var row in db.Query(selectQueryString))
 {
-    <div class="row form-group">
+    <div class="form-group">
         <div class="row">
             <div class="col-md-2">
                 <a href="@Url.Action("ModeratePaper", "Paper", new { id = row.PaperId })"><span class="label label-danger">@row.PaperTitle</span></a>
