@@ -586,27 +586,40 @@ namespace Serler.Controllers
 
             var model = new PagedViewModel<PaperViewModel>();
 
-            if (string.IsNullOrEmpty(attribute))
+            var countQuery = "";
+            var query = "";
+
+            if (attribute == "Author")
             {
-                attribute = "PaperTitle";
+                countQuery = "select COUNT(PaperId) from Paper where (Author like @searchText) and IsActive = 1;";
+                query = "select * from Paper where (Author like @searchText) and IsActive = 1 order by PaperTitle offset @skip rows fetch next @take rows only;";
+            }
+            else if (attribute == "Publisher")
+            {
+                countQuery = "select COUNT(PaperId) from Paper where (Publisher like @searchText) and IsActive = 1;";
+                query = "select * from Paper where (Publisher like @searchText) and IsActive = 1 order by PaperTitle offset @skip rows fetch next @take rows only;";
+            }
+            else
+            {
+                countQuery = "select COUNT(PaperId) from Paper where (PaperTitle like @searchText) and IsActive = 1;";
+                query = "select * from Paper where (PaperTitle like @searchText) and IsActive = 1 order by PaperTitle offset @skip rows fetch next @take rows only;";
             }
 
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Serler"].ConnectionString))
-            {
-                var countQuery = "select COUNT(PaperId) from Paper where (@attribute like @searchText) and IsActive = 1;";
-                var query = string.Format("select * from Paper where (@attribute like @searchText) and IsActive = 1 order by PaperTitle offset @skip rows fetch next @take rows only;");
+            {                
                 conn.Open();
+
                 model.TotalCount = conn.Query<int>(countQuery, new { attribute = attribute, searchText = "%" + searchText + "%" }).FirstOrDefault();
 
                 model.SearchModel = new SearchModel
                 {
-                    SearchText = "%" + searchText + "%",
+                    SearchText = searchText,
                     Take = 10,
                     Attribute = attribute
                 };
                 model.SearchModel.Skip = (page.Value - 1) * model.SearchModel.Take;
 
-                var member = conn.Query<PaperViewModel>(query, new { attribute = model.SearchModel.Attribute, searchText = "%" + searchText + "%", skip = model.SearchModel.Skip, take = model.SearchModel.Take }).ToList();
+                var member = conn.Query<PaperViewModel>(query, new { attribute = attribute, searchText = "%" + searchText + "%", skip = model.SearchModel.Skip, take = model.SearchModel.Take }).ToList();
                 if (member != null)
                 {
                     model.Result = member;
