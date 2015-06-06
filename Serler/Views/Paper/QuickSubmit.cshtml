@@ -193,10 +193,10 @@
         <div class="form-group">
             @Html.LabelFor(m => m.ResearchMethod, "Research Method", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Practice, new List<SelectListItem> {
-                       new SelectListItem { Value = "Survey" , Text = "Survey" },
-                       new SelectListItem { Value = "CaseStudy" , Text = "Case Study" },
-                       new SelectListItem { Value = "Experiment" , Text = "Experiment" }
+                @Html.DropDownListFor(m => m.ResearchMethod, new List<SelectListItem> {
+                       new SelectListItem { Value = "Survey" , Text = "4 (Description)" },
+                       new SelectListItem { Value = "Case Study" , Text = "5 (Description)" },
+                       new SelectListItem { Value = "Experiment" , Text = "6 (Description)" }
                     }, new { @class = "form-control", type = "text" })
             </div>
         </div>
@@ -214,7 +214,7 @@
         <br />
         <div class="row">
             <div class="col-md-2">
-                <label>ResearchMetrics</label>
+                <label>Research Metrics</label>
             </div>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.ResearchMetrics, new { @class = "form-control", type = "number", min = "1", max = "5" })
@@ -225,7 +225,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.ParticipantsNature, "Nature of Participants", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Practice, new List<SelectListItem> {
+                @Html.DropDownListFor(m => m.ParticipantsNature, new List<SelectListItem> {
                        new SelectListItem { Value = "Academics" , Text = "Academics" },
                        new SelectListItem { Value = "Researchers" , Text = "Researchers" },
                        new SelectListItem { Value = "General" , Text = "General" }

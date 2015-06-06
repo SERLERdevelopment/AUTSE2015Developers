@@ -247,13 +247,13 @@ namespace Serler.Controllers
                     ResearchQuestion = model.ResearchQuestion,ResearchMethod = model.ResearchMethod, ResearchMetrics = model.ResearchMetrics, 
                     ResearchLevel = model.ResearchLevel, ParticipantsNature = model.ParticipantsNature});
                 }
-                switch (submit)
-                {
-                    case "Save":
-                        return new Rotativa.PartialViewAsPdf("ViewPaper", model);
-                }
             }
             return View(model);
+        }
+
+        public ActionResult PrintMyView(PaperViewModel model)
+        {
+            return new Rotativa.PartialViewAsPdf("ViewPaper", model);
         }
 
         [HttpGet]

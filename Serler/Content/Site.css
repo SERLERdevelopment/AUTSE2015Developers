@@ -129,3 +129,11 @@ body {
     text-decoration: none;
     color: #ffffff;
 }
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
