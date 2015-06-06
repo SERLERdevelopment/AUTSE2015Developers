@@ -132,6 +132,26 @@
         <br />
         <div class="row">
             <div class="col-md-2">
+                <label>Result of study</label>
+            </div>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.StudyResult, new { @class = "form-control", type = "text" })
+                @Html.ValidationMessageFor(m => m.StudyResult)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <label>Implementation Integrity</label>
+            </div>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ImplementationIntegrity, new { @class = "form-control", type = "text" })
+                @Html.ValidationMessageFor(m => m.ImplementationIntegrity)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
                 <label>Confidence Rating</label>
             </div>
             <div class="col-md-10">

@@ -191,7 +191,7 @@ namespace Serler.Controllers
                     + " ContextWhat, ContextWhere, StudyResult, ImplementationIntegrity, ConfidenceRating, ConfidenceRatingReason, WhoRated, ResearchQuestion, ResearchMethod,"
                     + " ResearchMetrics, ResearchLevel, ParticipantsNature, IsActive, isAnalyzed, isRejected) "
                     + "values ('{0}', '{1}','{2}', '{3}','{4}', '{5}','{6}', '{7}', '{8}','{9}', '{10}','{11}', '{12}','{13}', '{14}','{15}', '{16}', '{17}',"
-                    + " '{18}', '{19}','{20}', '{21}','{22}', 1, 1, 0)", model.PaperTitle, model.Date, model.Author, model.JournalName, model.Category,
+                    + " '{18}', '{19}','{20}', '{21}', 1, 1, 0)", model.PaperTitle, model.Date, model.Author, model.JournalName, model.Category, model.Publisher, 
                     model.Methodology, model.Practice, model.OutcomeBeingTested, model.ContextWho, model.ContextWhat, model.ContextWhere, model.StudyResult,
                     model.ImplementationIntegrity, model.ConfidenceRating, model.ConfidenceRatingReason, model.WhoRated, model.ResearchQuestion, model.ResearchMethod,
                     model.ResearchMetrics, model.ResearchLevel, model.ParticipantsNature);
